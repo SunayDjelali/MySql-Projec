@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CSharpMySqlSample.Properties {
+namespace MySQLShoese.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
