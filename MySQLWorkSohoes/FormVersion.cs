@@ -129,7 +129,20 @@ namespace CSharpMySqlSample
         {
             this.Close();
         }
-        public int ReturnValueVer { get { return int.Parse(dataGridViewVer.SelectedCells[0].Value.ToString()); } }
-
+        public int ReturnValueVer
+        {
+            get
+            {
+                try
+                {
+                    return int.Parse(dataGridViewVer.SelectedCells[0].Value.ToString());
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Must be select First Column\n" + ex.Message);
+                    return 0;
+                }
+            }
+        }
     }
 }

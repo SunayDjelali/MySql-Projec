@@ -66,10 +66,8 @@ namespace CSharpMySqlSample
         {
             //Initialize mysql connection
             connection = new MySqlConnection(ConnectionString);
-            
             //Get all items in datatable
             DTFoundo = GetAllItems();
-
             //Fill grid with items
             dataGridViewFon.DataSource = DTFoundo;
             
@@ -85,12 +83,9 @@ namespace CSharpMySqlSample
             {
                 //Save records in database using DTArticle which is datasource for Grid
                 adapterFoundo.Update(DTFoundo);
-
                 //Refresh grid
                 DTFoundo = GetAllItems();
-                
                 dataGridViewFon.DataSource = DTFoundo;
-
                 MessageBox.Show("Items saved successfully...");
             }
             catch (Exception ex)
@@ -106,28 +101,37 @@ namespace CSharpMySqlSample
             {
                 //Delete a row from grid first.
                 dataGridViewFon.Rows.Remove(dataGridViewFon.SelectedRows[0]);
-
                 //Save records again. This will delete record from database.
                 adapterFoundo.Update(DTFoundo);
-
                 //Refresh grid. Get items Bu again from database and show it in grid.
                 DTFoundo = GetAllItems();
-
                 dataGridViewFon.DataSource = DTFoundo;
-
                 MessageBox.Show("Selected item deleted successfully...");
             }
             else
             {
                 MessageBox.Show("You must select entire row in order to delete it.");
             }
-
         }
 
         private void dataGridViewFon_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             this.Close();
         }
-        public int ReturnValueFon { get { return int.Parse(dataGridViewFon.SelectedCells[0].Value.ToString()); } }
+        public int ReturnValueFon 
+        { 
+            get 
+            {
+                try
+                {
+                    return int.Parse(dataGridViewFon.SelectedCells[0].Value.ToString()); 
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Must be select First Column\n" + ex.Message);
+                    return 0;
+                }
+            } 
+        }
     }
 }

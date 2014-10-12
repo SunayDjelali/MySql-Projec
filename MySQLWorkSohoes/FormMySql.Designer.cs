@@ -42,7 +42,7 @@ namespace CSharpMySqlSample
             this.dataGridViewWorck.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewWorck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewWorck.Name = "dataGridViewWorck";
-            this.dataGridViewWorck.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewWorck_CellMouseDoubleClick);
+            this.dataGridViewWorck.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewWorck_CellBeginEdit);
             // 
             // cmb_Save
             // 

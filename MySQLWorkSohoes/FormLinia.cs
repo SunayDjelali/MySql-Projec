@@ -68,10 +68,8 @@ namespace CSharpMySqlSample
         {
             //Initialize mysql connection
             connection = new MySqlConnection(ConnectionString);
-
             //Get all items in datatable
             DTLinia = GetAllItems();
-            
             //Fill grid with items
             dataGridViewLin.DataSource = DTLinia;
         }
@@ -87,12 +85,9 @@ namespace CSharpMySqlSample
             {
                 //Save records in database using DTArticle which is datasource for Grid
                 adapterLinia.Update(DTLinia);
-
                 //Refresh grid
                 DTLinia = GetAllItems();
-
                 dataGridViewLin.DataSource = DTLinia;
-
                 MessageBox.Show("Items saved successfully...");
             }
             catch (Exception ex)
@@ -108,15 +103,11 @@ namespace CSharpMySqlSample
             {
                 //Delete a row from grid first.
                 dataGridViewLin.Rows.Remove(dataGridViewLin.SelectedRows[0]);
-
                 //Save records again. This will delete record from database.
                 adapterLinia.Update(DTLinia);
-
                 //Refresh grid. Get items Bu again from database and show it in grid.
                 DTLinia = GetAllItems();
-
                 dataGridViewLin.DataSource = DTLinia;
-
                 MessageBox.Show("Selected item deleted successfully...");
             }
             else
@@ -130,6 +121,20 @@ namespace CSharpMySqlSample
         {
             this.Close();
         }
-        public int ReturnValueLin { get { return int.Parse(dataGridViewLin.SelectedCells[0].Value.ToString()); } }
+        public int ReturnValueLin 
+        { 
+            get 
+            {
+                try
+                {
+                    return int.Parse(dataGridViewLin.SelectedCells[0].Value.ToString());
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Must be select First Column\n" + ex.Message);
+                    return 0;
+                } 
+            }
+        }
     }
 }

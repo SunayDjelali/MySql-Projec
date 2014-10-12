@@ -11,7 +11,7 @@ Target Server Version : 50616
 File Encoding         : 65001
 
 Date: 2014-10-08 12:57:33
-*/test
+*/
 
 SET FOREIGN_KEY_CHECKS=0;
 

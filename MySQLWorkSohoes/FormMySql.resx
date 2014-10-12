@@ -127,6 +127,9 @@
   <data name="&gt;&gt;dataGridViewWorck.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cmb_Delete.Text" xml:space="preserve">
+    <value>&amp;Delete Selected</value>
+  </data>
   <data name="dataGridViewWorck.Size" type="System.Drawing.Size, System.Drawing">
     <value>892, 314</value>
   </data>
@@ -185,9 +188,6 @@
   <data name="&gt;&gt;cmb_Main_Exit.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmb_Main_Exit.Name" xml:space="preserve">
-    <value>cmb_Main_Exit</value>
-  </data>
   <data name="&gt;&gt;cmb_Delete.Name" xml:space="preserve">
     <value>cmb_Delete</value>
   </data>
@@ -233,8 +233,8 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Connecting to MySQL database using C#</value>
   </data>
-  <data name="cmb_Delete.Text" xml:space="preserve">
-    <value>&amp;Delete Selected</value>
+  <data name="&gt;&gt;cmb_Main_Exit.Name" xml:space="preserve">
+    <value>cmb_Main_Exit</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

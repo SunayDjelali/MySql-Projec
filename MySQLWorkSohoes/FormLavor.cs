@@ -63,14 +63,11 @@ namespace CSharpMySqlSample
         {
             //Initialize mysql connection
             connection = new MySqlConnection(ConnectionString);
-
             //Get all items in datatable
             DTLavoratione = GetAllItems();
-
             //Fill grid with items from Lavoratione
             dataGridViewLav.DataSource = DTLavoratione;
             dataGridViewLav.Columns["ID"].Visible = false;
-
         }
 
         private void cmb_Save_Lav_Click(object sender, EventArgs e)
@@ -96,10 +93,8 @@ namespace CSharpMySqlSample
             {
                 //Delete a row from grid first.
                 dataGridViewLav.Rows.Remove(dataGridViewLav.SelectedRows[0]);
-
                 //Save records again. This will delete record from database.
                 adapterLavoratione.Update(DTLavoratione);
-
                 //Refresh grid. Get items again from database and show it in grid.
                 DTLavoratione = GetAllItems();
                 dataGridViewLav.DataSource = DTLavoratione;
@@ -120,6 +115,20 @@ namespace CSharpMySqlSample
         {
             this.Close();
         }
-        public int ReturnValueLav { get { return int.Parse(dataGridViewLav.SelectedCells[0].Value.ToString()); } }
+        public int ReturnValueLav 
+        { 
+            get 
+            {
+                try
+                {
+                    return int.Parse(dataGridViewLav.SelectedCells[0].Value.ToString()); 
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Must be select First Column\n" + ex.Message);
+                    return 0;
+                }
+            } 
+        }
     }
 }

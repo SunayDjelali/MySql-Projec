@@ -174,15 +174,53 @@ namespace CSharpMySqlSample
             this.Close();
         }
         
-        private void dataGridViewWorck_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        //private void dataGridViewWorck_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    if (e.ColumnIndex == 1)
+        //    {
+        //        FormBu FBu = new FormBu();
+        //        FBu.ShowDialog();
+        //        dataGridViewWorck.SelectedCells[0].Value = FBu.ReturnValueBu;
+        //    }
+        //    else if (e.ColumnIndex == 2)
+        //    {
+        //        FormArticle FArt = new FormArticle();
+        //        FArt.ShowDialog();
+        //        dataGridViewWorck.SelectedCells[0].Value = FArt.ReturnValueArt;
+        //    }
+        //    else if (e.ColumnIndex == 3)
+        //    {
+        //        FormLavor FLav = new FormLavor();
+        //        FLav.ShowDialog();
+        //        dataGridViewWorck.SelectedCells[0].Value = FLav.ReturnValueLav;
+        //    }
+        //    else if (e.ColumnIndex == 4)
+        //    {
+        //        FormVersion FVer = new FormVersion();
+        //        FVer.ShowDialog();
+        //        dataGridViewWorck.SelectedCells[0].Value = FVer.ReturnValueVer;
+        //    }
+        //    else if (e.ColumnIndex == 5)
+        //    {
+        //        FormFoundo FFon = new FormFoundo();
+        //        FFon.ShowDialog();
+        //        dataGridViewWorck.SelectedCells[0].Value = FFon.ReturnValueFon;
+        //    }
+        //    else if (e.ColumnIndex == 6)
+        //    {
+        //        FormLinia FLin = new FormLinia();
+        //        FLin.ShowDialog();
+        //        dataGridViewWorck.SelectedCells[0].Value = FLin.ReturnValueLin;
+        //    }
+        //}
+
+        private void dataGridViewWorck_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            
             if (e.ColumnIndex == 1)
             {
                 FormBu FBu = new FormBu();
                 FBu.ShowDialog();
                 dataGridViewWorck.SelectedCells[0].Value = FBu.ReturnValueBu;
-
             }
             else if (e.ColumnIndex == 2)
             {

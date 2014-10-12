@@ -71,10 +71,8 @@ namespace CSharpMySqlSample
         {
             //Initialize mysql connection
             connection = new MySqlConnection(ConnectionString);
-
             //Get all items in datatable
             DTArticle = GetAllItems();
-
             //Fill grid with items
             dataGridViewArt.DataSource = DTArticle;
             dataGridViewArt.Columns["ID"].Visible = false;
@@ -86,12 +84,9 @@ namespace CSharpMySqlSample
             {
                 //Save records in database using DTArticle which is datasource for Grid
                 adapterArticle.Update(DTArticle);
-
                 //Refresh grid
                 DTArticle = GetAllItems();
-
                 dataGridViewArt.DataSource = DTArticle;
-
                 MessageBox.Show("Items saved successfully...");
             }
             catch (Exception ex)
@@ -106,28 +101,37 @@ namespace CSharpMySqlSample
             {
                 //Delete a row from grid first.
                 dataGridViewArt.Rows.Remove(dataGridViewArt.SelectedRows[0]);
-
                 //Save records again. This will delete record from database.
                 adapterArticle.Update(DTArticle);
-
                 //Refresh grid. Get items Bu again from database and show it in grid.
                 DTArticle = GetAllItems();
-
                 dataGridViewArt.DataSource = DTArticle;
-
                 MessageBox.Show("Selected item deleted successfully...");
             }
             else
             {
                 MessageBox.Show("You must select entire row in order to delete it.");
             }
-
         }
 
         private void dataGridViewArt_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             this.Close();
         }
-        public int ReturnValueArt { get { return int.Parse(dataGridViewArt.SelectedCells[0].Value.ToString()); } }
+        public int ReturnValueArt 
+        {
+            get
+            {
+                try
+                {
+                    return int.Parse(dataGridViewArt.SelectedCells[0].Value.ToString());
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Must be select First Column\n" + ex.Message);
+                    return 0;
+                }
+            } 
+        }
     }
 }

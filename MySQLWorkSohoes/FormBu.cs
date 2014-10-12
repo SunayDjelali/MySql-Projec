@@ -127,22 +127,14 @@ namespace CSharpMySqlSample
             {
                 try
                 {
-                    int opit;
-                    //if (int.TryParse(dataGridViewBu.SelectedCells[0].Value.ToString(), out opit))
-                    {
-                    bool parceSuccess = int.TryParse(dataGridViewBu.SelectedCells[0].Value.ToString(), out opit);
-                    return opit;
-                        //int.Parse(dataGridViewBu.SelectedCells[0].Value.ToString());
-                    }
+                    return int.Parse(dataGridViewBu.SelectedCells[0].Value.ToString());
                 }
-                catch (Exception ex)
+                catch (FormatException ex)
                 {
-                    throw new FormatException(ex.Message);
-                    //MessageBox.Show(ex.Message);
+                    MessageBox.Show("Must be select First Column\n" + ex.Message);
+                    return 0;
                 }
-                    //int.Parse(dataGridViewBu.SelectedCells[0].Value.ToString());
             } 
         }  
-        
     }
 }
