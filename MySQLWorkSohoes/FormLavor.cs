@@ -128,7 +128,16 @@ namespace CSharpMySqlSample
                     MessageBox.Show("Must be select First Column\n" + ex.Message);
                     return 0;
                 }
-            } 
+                catch (NullReferenceException)
+                {
+                    return 0;
+                }
+            }
+            set
+            {
+                ReturnValueLav = 0;
+            }
+           
         }
     }
 }

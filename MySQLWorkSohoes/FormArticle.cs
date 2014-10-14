@@ -36,20 +36,18 @@ namespace CSharpMySqlSample
                 adapterArticle.Fill(DSArticle);
 
                 // Set the UPDATE command and parameters.
-                adapterArticle.UpdateCommand = new MySqlCommand("UPDATE article SET ID=@ID, ArticleNo=@ArticleNo, Updated_Dt=NOW() WHERE ID=@ID;", connection);
-                adapterArticle.UpdateCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
+                adapterArticle.UpdateCommand = new MySqlCommand("UPDATE article SET ArticleNo=@ArticleNo, Updated_Dt=NOW() WHERE ArticleNo=@ArticleNo;", connection);
                 adapterArticle.UpdateCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
                 adapterArticle.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the INSERT command and parameter.
-                adapterArticle.InsertCommand = new MySqlCommand("INSERT INTO article VALUES (@ID, @ArticleNo, NOW());", connection);
-                adapterArticle.InsertCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
+                adapterArticle.InsertCommand = new MySqlCommand("INSERT INTO article VALUES (@ArticleNo, NOW());", connection);
                 adapterArticle.InsertCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
                 adapterArticle.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the DELETE command and parameter.
                 adapterArticle.DeleteCommand = new MySqlCommand("DELETE FROM article WHERE ID=@ID;", connection);
-                adapterArticle.DeleteCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
+                adapterArticle.DeleteCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
                 adapterArticle.DeleteCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 //return datatable with all records
@@ -129,6 +127,10 @@ namespace CSharpMySqlSample
                 catch (FormatException ex)
                 {
                     MessageBox.Show("Must be select First Column\n" + ex.Message);
+                    return 0;
+                }
+                catch (NullReferenceException) 
+                {
                     return 0;
                 }
             } 

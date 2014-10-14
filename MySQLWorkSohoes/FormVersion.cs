@@ -127,9 +127,30 @@ namespace CSharpMySqlSample
 
         private void dataGridViewVer_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            //public int ReturnValueVer
+            //{
+            //    get
+            //    {
+            //        try
+            //        {
+            //            return int.Parse(dataGridViewVer.SelectedCells[0].Value.ToString());
+            //        }
+            //        catch (FormatException ex)
+            //        {
+            //            MessageBox.Show("Must be select First Column\n" + ex.Message);
+            //            return 0;
+            //        }
+            //        catch (NullReferenceException ex)
+            //        {
+            //            MessageBox.Show("Test" + ex.Message);
+            //            return 0;
+            //        }
+            //    }
+            //}
+
             this.Close();
         }
-        public int ReturnValueVer
+        public int ReturnValueVer 
         {
             get
             {
@@ -142,7 +163,16 @@ namespace CSharpMySqlSample
                     MessageBox.Show("Must be select First Column\n" + ex.Message);
                     return 0;
                 }
+                catch (NullReferenceException)
+                {
+                    return 0;
+                }
             }
+            set
+            {
+                ReturnValueVer = 0;
+            }
+
         }
     }
 }
