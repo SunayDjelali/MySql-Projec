@@ -38,6 +38,7 @@ namespace CSharpMySqlSample
                 dataGridViewWorck.DataSource = DTWorck;
                 dataGridViewWorck.Columns["ID"].Visible = false;
                 dataGridViewWorck.Columns["Updated_Dt"].Visible = false;
+               
             }
             catch (Exception ex)
             {
@@ -58,21 +59,21 @@ namespace CSharpMySqlSample
                 adapterWorck.Fill(DSworck);
                 //AutoGenerateColumns = false;
                 //Calculate Values columns by rows in total column
-                Int32 curentSum;
-                Int32 newSum;
-                foreach (DataRow row in DSworck.Tables[0].Rows)
-                {
-                    if (row["Total"] == DBNull.Value)
-                    {
-                        row["Total"] = 0;
-                    }
-                    newSum = (Int32)row["No_39"] + (Int32)row["No_40"] + (Int32)row["No_41"] + (Int32)row["No_42"] + (Int32)row["No_43"] + (Int32)row["No_44"] + (Int32)row["No_45"] + (Int32)row["No_46"];
-                    curentSum = (int)row["Total"];
-                    if (newSum != curentSum)
-                    {
-                        row["Total"] = newSum;
-                    }
-                }
+                //Int32 curentSum;
+                //Int32 newSum;
+                //foreach (DataRow row in DSworck.Tables[0].Rows)
+                //{
+                //    if (row["Total"] == DBNull.Value)
+                //    {
+                //        row["Total"] = 0;
+                //    }
+                //    newSum = (Int32)row["No_39"] + (Int32)row["No_40"] + (Int32)row["No_41"] + (Int32)row["No_42"] + (Int32)row["No_43"] + (Int32)row["No_44"] + (Int32)row["No_45"] + (Int32)row["No_46"];
+                //    curentSum = (int)row["Total"];
+                //    if (newSum != curentSum)
+                //    {
+                //        row["Total"] = newSum;
+                //    }
+                //}
                     // Set the UPDATE command and parameters.
                     adapterWorck.UpdateCommand = new MySqlCommand(
                         "UPDATE worck SET Bu_ID=@Bu_ID, Article_ID=@Article_ID, Lavoratione_ID=@Lavoratione_ID, Versions_ID=@Versions_ID, Foundo_ID=@Foundo_ID, Linia_ID=@Linia_ID, No_39=@No_39, No_40=@No_40, No_41=@No_41, No_42=@No_42, No_43=@No_43, No_44=@No_44, No_45=@No_45, No_46=@No_46, Total=@Total, Updated_Dt=NOW() WHERE ID=@ID;",
@@ -138,6 +139,7 @@ namespace CSharpMySqlSample
             {
                 //Save records in database using DTItems which is datasource for Grid
                 adapterWorck.Update(DTWorck);
+                
                 //Refresh grid
                 DTWorck = GetAllItems();
                 dataGridViewWorck.DataSource = DTWorck;
@@ -173,46 +175,6 @@ namespace CSharpMySqlSample
         {
             this.Close();
         }
-        
-        //private void dataGridViewWorck_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        //{
-        //    if (e.ColumnIndex == 1)
-        //    {
-        //        FormBu FBu = new FormBu();
-        //        FBu.ShowDialog();
-        //        dataGridViewWorck.SelectedCells[0].Value = FBu.ReturnValueBu;
-        //    }
-        //    else if (e.ColumnIndex == 2)
-        //    {
-        //        FormArticle FArt = new FormArticle();
-        //        FArt.ShowDialog();
-        //        dataGridViewWorck.SelectedCells[0].Value = FArt.ReturnValueArt;
-        //    }
-        //    else if (e.ColumnIndex == 3)
-        //    {
-        //        FormLavor FLav = new FormLavor();
-        //        FLav.ShowDialog();
-        //        dataGridViewWorck.SelectedCells[0].Value = FLav.ReturnValueLav;
-        //    }
-        //    else if (e.ColumnIndex == 4)
-        //    {
-        //        FormVersion FVer = new FormVersion();
-        //        FVer.ShowDialog();
-        //        dataGridViewWorck.SelectedCells[0].Value = FVer.ReturnValueVer;
-        //    }
-        //    else if (e.ColumnIndex == 5)
-        //    {
-        //        FormFoundo FFon = new FormFoundo();
-        //        FFon.ShowDialog();
-        //        dataGridViewWorck.SelectedCells[0].Value = FFon.ReturnValueFon;
-        //    }
-        //    else if (e.ColumnIndex == 6)
-        //    {
-        //        FormLinia FLin = new FormLinia();
-        //        FLin.ShowDialog();
-        //        dataGridViewWorck.SelectedCells[0].Value = FLin.ReturnValueLin;
-        //    }
-        //}
 
         private void dataGridViewWorck_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {

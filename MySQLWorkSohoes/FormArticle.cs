@@ -46,7 +46,7 @@ namespace CSharpMySqlSample
                 adapterArticle.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the DELETE command and parameter.
-                adapterArticle.DeleteCommand = new MySqlCommand("DELETE FROM article WHERE ID=@ID;", connection);
+                adapterArticle.DeleteCommand = new MySqlCommand("DELETE FROM article WHERE ArticleNo=@ArticleNo;", connection);
                 adapterArticle.DeleteCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
                 adapterArticle.DeleteCommand.UpdatedRowSource = UpdateRowSource.None;
 
@@ -73,7 +73,7 @@ namespace CSharpMySqlSample
             DTArticle = GetAllItems();
             //Fill grid with items
             dataGridViewArt.DataSource = DTArticle;
-            dataGridViewArt.Columns["ID"].Visible = false;
+            //dataGridViewArt.ClearSelection(); 
         }
 
         private void cmb_Save_Art_Click(object sender, EventArgs e)
@@ -122,6 +122,10 @@ namespace CSharpMySqlSample
             {
                 try
                 {
+                    //if (one)
+                    //{
+                    //    this.Close();
+                    //}
                     return int.Parse(dataGridViewArt.SelectedCells[0].Value.ToString());
                 }
                 catch (FormatException ex)

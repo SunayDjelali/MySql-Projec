@@ -67,7 +67,6 @@ namespace CSharpMySqlSample
             DTLavoratione = GetAllItems();
             //Fill grid with items from Lavoratione
             dataGridViewLav.DataSource = DTLavoratione;
-            dataGridViewLav.Columns["ID"].Visible = false;
         }
 
         private void cmb_Save_Lav_Click(object sender, EventArgs e)
