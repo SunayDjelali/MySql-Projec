@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.IO;
+using System.Diagnostics;
 
 namespace CSharpMySqlSample
 {
@@ -66,6 +68,8 @@ namespace CSharpMySqlSample
         private void cmb_Version_Exit_Click(object sender, EventArgs e)
         {
             this.Close();
+
+
         }
 
         private void FormVersion_Load(object sender, EventArgs e)
@@ -127,27 +131,6 @@ namespace CSharpMySqlSample
 
         private void dataGridViewVer_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //public int ReturnValueVer
-            //{
-            //    get
-            //    {
-            //        try
-            //        {
-            //            return int.Parse(dataGridViewVer.SelectedCells[0].Value.ToString());
-            //        }
-            //        catch (FormatException ex)
-            //        {
-            //            MessageBox.Show("Must be select First Column\n" + ex.Message);
-            //            return 0;
-            //        }
-            //        catch (NullReferenceException ex)
-            //        {
-            //            MessageBox.Show("Test" + ex.Message);
-            //            return 0;
-            //        }
-            //    }
-            //}
-
             this.Close();
         }
         public int ReturnValueVer 

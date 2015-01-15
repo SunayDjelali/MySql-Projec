@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 //Include mysql client namespace.
@@ -58,22 +57,7 @@ namespace CSharpMySqlSample
                 //get query results in dataset
                 adapterWorck.Fill(DSworck);
                 //AutoGenerateColumns = false;
-                //Calculate Values columns by rows in total column
-                //Int32 curentSum;
-                //Int32 newSum;
-                //foreach (DataRow row in DSworck.Tables[0].Rows)
-                //{
-                //    if (row["Total"] == DBNull.Value)
-                //    {
-                //        row["Total"] = 0;
-                //    }
-                //    newSum = (Int32)row["No_39"] + (Int32)row["No_40"] + (Int32)row["No_41"] + (Int32)row["No_42"] + (Int32)row["No_43"] + (Int32)row["No_44"] + (Int32)row["No_45"] + (Int32)row["No_46"];
-                //    curentSum = (int)row["Total"];
-                //    if (newSum != curentSum)
-                //    {
-                //        row["Total"] = newSum;
-                //    }
-                //}
+
                     // Set the UPDATE command and parameters.
                     adapterWorck.UpdateCommand = new MySqlCommand(
                         "UPDATE worck SET Bu_ID=@Bu_ID, Article_ID=@Article_ID, Lavoratione_ID=@Lavoratione_ID, Versions_ID=@Versions_ID, Foundo_ID=@Foundo_ID, Linia_ID=@Linia_ID, No_39=@No_39, No_40=@No_40, No_41=@No_41, No_42=@No_42, No_43=@No_43, No_44=@No_44, No_45=@No_45, No_46=@No_46, Total=@Total, Updated_Dt=NOW() WHERE ID=@ID;",
@@ -137,7 +121,6 @@ namespace CSharpMySqlSample
         {
             try
             {
-                //Save records in database using DTItems which is datasource for Grid
                 adapterWorck.Update(DTWorck);
                 
                 //Refresh grid
@@ -178,6 +161,7 @@ namespace CSharpMySqlSample
 
         private void dataGridViewWorck_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+            
             if (e.ColumnIndex == 1)
             {
                 FormBu FBu = new FormBu();
@@ -214,6 +198,56 @@ namespace CSharpMySqlSample
                 FLin.ShowDialog();
                 dataGridViewWorck.SelectedCells[0].Value = FLin.ReturnValueLin;
             }
-        }       
+        }
+        private void dataGridViewWorck_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            //int lastRecortIndex = e.RowIndex;
+            e.Row.Cells["No_39"].Value = 0;
+            e.Row.Cells["No_40"].Value = 0;
+            e.Row.Cells["No_41"].Value = 0;
+            e.Row.Cells["No_42"].Value = 0;
+            e.Row.Cells["No_43"].Value = 0;
+            e.Row.Cells["No_44"].Value = 0;
+            e.Row.Cells["No_45"].Value = 0;
+            e.Row.Cells["No_46"].Value = 0;
+        }
+        private void dataGridViewWorck_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //SetZeroVlaue();
+                int SelectedRowIndex = e.RowIndex;
+                //Save records in database using DTItems which is datasource for Grid
+                Int32 curentSum;
+                Int32 newSum;
+                //Calculate Values columns by rows in total column
+                if (dataGridViewWorck.Rows[SelectedRowIndex].Cells["Total"].Value == DBNull.Value)
+                {
+                    dataGridViewWorck.Rows[SelectedRowIndex].Cells["Total"].Value = 0;
+                }
+                //7 di 14
+                newSum = Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_39"].Value.ToString())
+                       + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_40"].Value.ToString())
+                       + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_41"].Value.ToString())
+                       + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_42"].Value.ToString())
+                       + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_43"].Value.ToString())
+                       + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_44"].Value.ToString())
+                       + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_45"].Value.ToString())
+                       + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_46"].Value.ToString());
+
+                curentSum = Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["Total"].Value.ToString());
+                if (newSum != curentSum)
+                {
+                    dataGridViewWorck.Rows[SelectedRowIndex].Cells["Total"].Value = newSum;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("" + ex);
+                //throw;
+            }
+        }
+
     }
 }

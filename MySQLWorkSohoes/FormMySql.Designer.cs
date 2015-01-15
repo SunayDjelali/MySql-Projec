@@ -39,10 +39,13 @@ namespace CSharpMySqlSample
             // dataGridViewWorck
             // 
             resources.ApplyResources(this.dataGridViewWorck, "dataGridViewWorck");
+            this.dataGridViewWorck.AllowUserToOrderColumns = true;
             this.dataGridViewWorck.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewWorck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewWorck.Name = "dataGridViewWorck";
+            this.dataGridViewWorck.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridViewWorck_DefaultValuesNeeded);
             this.dataGridViewWorck.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewWorck_CellBeginEdit);
+            this.dataGridViewWorck.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewWorck_CellValueChanged);
             // 
             // cmb_Save
             // 
