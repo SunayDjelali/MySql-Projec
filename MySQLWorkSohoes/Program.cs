@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using MySQLShoese;
 
 namespace CSharpMySqlSample
 {
@@ -14,7 +15,9 @@ namespace CSharpMySqlSample
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMySql());
+            //Application.Run(new FormMySql());
+            Application.Run(new FormShoes());
+            
         }
     }
 }
