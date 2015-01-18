@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="No_41.HeaderText" xml:space="preserve">
+    <value>No_41</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Connecting to MySQL database using C#</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmb_Delete.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 32</value>
@@ -149,8 +155,8 @@
   <data name="&gt;&gt;cmb_Main_Exit.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Updated_Dt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>916, 413</value>
   </data>
   <data name="&gt;&gt;No_40.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -175,6 +181,9 @@
   </data>
   <data name="cmb_Main_Exit.Text" xml:space="preserve">
     <value>&amp;Exit</value>
+  </data>
+  <data name="Article_ID.HeaderText" xml:space="preserve">
+    <value>Article_ID</value>
   </data>
   <data name="&gt;&gt;Total.Name" xml:space="preserve">
     <value>Total</value>
@@ -221,6 +230,9 @@
   <data name="&gt;&gt;cmb_Delete.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="No_43.HeaderText" xml:space="preserve">
+    <value>No_43</value>
+  </data>
   <data name="Bu_ID.HeaderText" xml:space="preserve">
     <value>Bu_ID</value>
   </data>
@@ -230,17 +242,14 @@
   <data name="&gt;&gt;No_42.Name" xml:space="preserve">
     <value>No_42</value>
   </data>
-  <data name="Linia_ID.HeaderText" xml:space="preserve">
-    <value>Linia_ID</value>
+  <data name="&gt;&gt;cmb_Main_Exit.Name" xml:space="preserve">
+    <value>cmb_Main_Exit</value>
   </data>
   <data name="&gt;&gt;dataGridViewWorck.Name" xml:space="preserve">
     <value>dataGridViewWorck</value>
   </data>
   <data name="&gt;&gt;cmb_Save.Name" xml:space="preserve">
     <value>cmb_Save</value>
-  </data>
-  <data name="&gt;&gt;ID.Name" xml:space="preserve">
-    <value>ID</value>
   </data>
   <data name="No_40.HeaderText" xml:space="preserve">
     <value>No_40</value>
@@ -287,9 +296,6 @@
   <data name="&gt;&gt;Lavoratione_ID.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Foundo_ID.Name" xml:space="preserve">
-    <value>Foundo_ID</value>
-  </data>
   <data name="cmb_Save.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 32</value>
   </data>
@@ -298,6 +304,9 @@
   </data>
   <data name="&gt;&gt;Article_ID.Name" xml:space="preserve">
     <value>Article_ID</value>
+  </data>
+  <data name="&gt;&gt;No_45.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cmb_Delete.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -308,8 +317,8 @@
   <data name="cmb_Save.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 332</value>
   </data>
-  <data name="No_43.HeaderText" xml:space="preserve">
-    <value>No_43</value>
+  <data name="&gt;&gt;ID.Name" xml:space="preserve">
+    <value>ID</value>
   </data>
   <data name="Updated_Dt.HeaderText" xml:space="preserve">
     <value>Updated_Dt</value>
@@ -320,17 +329,14 @@
   <data name="Lavoratione_ID.HeaderText" xml:space="preserve">
     <value>Lavoratione_ID</value>
   </data>
-  <data name="cmb_Main_Exit.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
-  </data>
   <data name="&gt;&gt;Updated_Dt.Name" xml:space="preserve">
     <value>Updated_Dt</value>
   </data>
   <data name="&gt;&gt;Linia_ID.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;No_45.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Linia_ID.HeaderText" xml:space="preserve">
+    <value>Linia_ID</value>
   </data>
   <data name="&gt;&gt;No_44.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -344,8 +350,8 @@
   <data name="&gt;&gt;Total.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Article_ID.HeaderText" xml:space="preserve">
-    <value>Article_ID</value>
+  <data name="cmb_Main_Exit.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;dataGridViewWorck.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -356,26 +362,20 @@
   <data name="No_45.HeaderText" xml:space="preserve">
     <value>No_45</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Connecting to MySQL database using C#</value>
-  </data>
-  <data name="dataGridViewWorck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>892, 314</value>
+  <data name="&gt;&gt;Foundo_ID.Name" xml:space="preserve">
+    <value>Foundo_ID</value>
   </data>
   <data name="cmb_Save.Text" xml:space="preserve">
     <value>&amp;Save</value>
   </data>
-  <data name="No_41.HeaderText" xml:space="preserve">
-    <value>No_41</value>
+  <data name="&gt;&gt;Updated_Dt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>916, 413</value>
+  <data name="dataGridViewWorck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>892, 314</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmb_Main_Exit.Name" xml:space="preserve">
-    <value>cmb_Main_Exit</value>
   </data>
   <data name="No_42.HeaderText" xml:space="preserve">
     <value>No_42</value>
@@ -389,16 +389,13 @@
   <data name="cmb_Main_Exit.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <metadata name="No_45.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="Lavoratione_ID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Updated_Dt.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Bu_ID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="No_44.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Updated_Dt.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Versions_ID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -425,6 +422,9 @@
   <metadata name="No_41.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Foundo_ID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -434,10 +434,10 @@
   <metadata name="No_39.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Foundo_ID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="No_44.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Bu_ID.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="No_45.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

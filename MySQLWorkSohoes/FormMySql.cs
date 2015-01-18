@@ -156,22 +156,9 @@ namespace CSharpMySqlSample
         {
             if (e.ColumnIndex == 1)
             {
+                SetZeroVlaue();
                 FormBu FBu = new FormBu();
                 FBu.ShowDialog();
-
-                int lastRecortIndex = dataGridViewWorck.NewRowIndex;
-                if (dataGridViewWorck.SelectedCells[0].Value == DBNull.Value)
-                {
-                    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_39"].Value = 0;
-                    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_40"].Value = 0;
-                    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_41"].Value = 0;
-                    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_42"].Value = 0;
-                    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_43"].Value = 0;
-                    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_44"].Value = 0;
-                    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_45"].Value = 0;
-                    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_46"].Value = 0;
-                }
-
                 dataGridViewWorck.SelectedCells[0].Value = FBu.ReturnValueBu;
             }
             else if (e.ColumnIndex == 2)
@@ -204,10 +191,7 @@ namespace CSharpMySqlSample
                 FLin.ShowDialog();
                 dataGridViewWorck.SelectedCells[0].Value = FLin.ReturnValueLin;
             }
-        }
 
-        private void dataGridViewWorck_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
             try
             {
                 //SetZeroVlaue();
@@ -236,25 +220,29 @@ namespace CSharpMySqlSample
                     dataGridViewWorck.Rows[SelectedRowIndex].Cells["Total"].Value = newSum;
                 }
             }
-            catch 
+            catch (Exception ex)
             {
-                //MessageBox.Show("" + ex);
+                //SetZeroVlaue();
+                MessageBox.Show("" + ex);
                 //throw;
-
             }
         }
 
-        //public void SetZeroVlaue()
+        public void SetZeroVlaue()
+        {
+            int lastRecortIndex = dataGridViewWorck.NewRowIndex;
+            if (dataGridViewWorck.SelectedCells[0].Value == DBNull.Value)
+            {
+                for (int numbers = 7; numbers < 15; numbers++)
+                {
+                    dataGridViewWorck.Rows[lastRecortIndex].Cells[numbers].Value = 0;
+                }
+            }
+        }
+
+        //private void dataGridViewWorck_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         //{
-        //    int lastRecortIndex = dataGridViewWorck.NewRowIndex;
-        //    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_39"].Value = 0;
-        //    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_40"].Value = 0;
-        //    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_41"].Value = 0;
-        //    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_42"].Value = 0;
-        //    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_43"].Value = 0;
-        //    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_44"].Value = 0;
-        //    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_45"].Value = 0;
-        //    dataGridViewWorck.Rows[lastRecortIndex].Cells["No_46"].Value = 0;
+
         //}
     }
 }

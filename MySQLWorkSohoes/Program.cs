@@ -15,8 +15,8 @@ namespace CSharpMySqlSample
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new FormMySql());
-            Application.Run(new FormShoes());
+            Application.Run(new FormMySql());
+            //Application.Run(new FormShoes());
             
         }
     }
