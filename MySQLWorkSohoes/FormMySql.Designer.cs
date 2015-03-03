@@ -38,13 +38,12 @@ namespace CSharpMySqlSample
             // 
             // dataGridViewWorck
             // 
-            resources.ApplyResources(this.dataGridViewWorck, "dataGridViewWorck");
-            this.dataGridViewWorck.AllowUserToOrderColumns = true;
+            this.dataGridViewWorck.AllowUserToDeleteRows = false;
             this.dataGridViewWorck.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewWorck.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.dataGridViewWorck, "dataGridViewWorck");
             this.dataGridViewWorck.Name = "dataGridViewWorck";
             this.dataGridViewWorck.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewWorck_CellBeginEdit);
-            //this.dataGridViewWorck.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewWorck_CellValueChanged);
             // 
             // cmb_Save
             // 
@@ -74,19 +73,18 @@ namespace CSharpMySqlSample
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cmb_Main_Exit);
-            this.Controls.Add(this.cmb_Delete);
-            this.Controls.Add(this.cmb_Save);
             this.Controls.Add(this.dataGridViewWorck);
+            this.Controls.Add(this.cmb_Delete);
+            this.Controls.Add(this.cmb_Main_Exit);
+            this.Controls.Add(this.cmb_Save);
             this.Name = "FormMySql";
-            this.Load += new System.EventHandler(this.frmMySql_Load);
+            this.Load += new System.EventHandler(this.FormMySql_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWorck)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
         private System.Windows.Forms.DataGridView dataGridViewWorck;
         private System.Windows.Forms.Button cmb_Save;
         private System.Windows.Forms.Button cmb_Delete;

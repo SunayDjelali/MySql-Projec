@@ -1,39 +1,46 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-//Include mysql client namespace.
-using MySql.Data.MySqlClient;
-using System.Configuration;
-
 namespace CSharpMySqlSample
 {
-    
+    //Include mysql client namespace.
+    using MySql.Data.MySqlClient;
+    using System;
+    using System.Data;
+    using System.Windows.Forms;
     public partial class FormMySql : Form
     {
-        
         //Read connection string from application settings = App.config.xml
         string ConnectionString = Connection.MyConnectionString;
         MySqlConnection connection;
         MySqlDataAdapter adapterWorck;
-        DataTable DTWorck;
+        DataTable DataTableWork;
+
         public FormMySql()
         {
             InitializeComponent();
         }
-        private void frmMySql_Load(object sender, EventArgs e)
+
+        public void SetZeroVlaue()
+        {
+            int lastRecortIndex = dataGridViewWorck.NewRowIndex;
+            if (dataGridViewWorck.SelectedCells[0].Value == DBNull.Value)
+            {
+                for (int numbers = 7; numbers < 15; numbers++)
+                {
+                    dataGridViewWorck.Rows[lastRecortIndex].Cells[numbers].Value = 0;
+                }
+            }
+        }
+
+        private void FormMySql_Load(object sender, EventArgs e)
         {
             try
             {
                 //Initialize mysql connection
                 connection = new MySqlConnection(ConnectionString);
                 //Get all items in datatable
-                DTWorck = GetAllItems();
+                DataTableWork = GetAllItemsWork();
                 //FormVersion FVer = new FormVersion();
                 //Fill grid with items
-                dataGridViewWorck.DataSource = DTWorck;
+                dataGridViewWorck.DataSource = DataTableWork;
                 dataGridViewWorck.Columns["ID"].Visible = false;
                 dataGridViewWorck.Columns["Updated_Dt"].Visible = false;
             }
@@ -42,17 +49,18 @@ namespace CSharpMySqlSample
                 MessageBox.Show(ex.Message);
             }
         }
+
         //Get all items from database into datatable
-        DataTable GetAllItems()
+        public DataTable GetAllItemsWork()
         {
             try
             {
                 //prepare query to get all records from items table
                 //prepare adapter to run query
                 adapterWorck = new MySqlDataAdapter(Connection.TableWorck, connection);
-                DataSet DSworck = new DataSet();
+                DataSet DataSetWorck = new DataSet();
                 //get query results in dataset
-                adapterWorck.Fill(DSworck);
+                adapterWorck.Fill(DataSetWorck);
                 //AutoGenerateColumns = false;
                     // Set the UPDATE command and parameters.
                     adapterWorck.UpdateCommand = new MySqlCommand(
@@ -101,10 +109,9 @@ namespace CSharpMySqlSample
                     // Set the DELETE command and parameter.
                     adapterWorck.DeleteCommand = new MySqlCommand("DELETE FROM worck " + "WHERE ID=@ID;", connection);
                     adapterWorck.DeleteCommand.Parameters.Add("@ID", MySqlDbType.Int32, 4, "ID");
-                    adapterWorck.DeleteCommand.UpdatedRowSource = UpdateRowSource.None;
 
                     //return datatable with all records
-                    return DSworck.Tables[0];
+                    return DataSetWorck.Tables[0];
             }
             catch (Exception ex)
             {
@@ -112,14 +119,15 @@ namespace CSharpMySqlSample
             }
                 return null;
         }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                adapterWorck.Update(DTWorck);
+                adapterWorck.Update(DataTableWork);
                 //Refresh grid
-                DTWorck = GetAllItems();
-                dataGridViewWorck.DataSource = DTWorck;
+                DataTableWork = GetAllItemsWork();
+                dataGridViewWorck.DataSource = DataTableWork;
                 MessageBox.Show("Items saved successfully...");
             }
             catch(Exception ex)
@@ -127,6 +135,7 @@ namespace CSharpMySqlSample
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dataGridViewWorck.SelectedRows.Count > 0)
@@ -135,11 +144,11 @@ namespace CSharpMySqlSample
                 dataGridViewWorck.Rows.Remove(dataGridViewWorck.SelectedRows[0]);
 
                 //Save records again. This will delete record from database.
-                adapterWorck.Update(DTWorck);
+                adapterWorck.Update(DataTableWork);
 
                 //Refresh grid. Get items again from database and show it in grid.
-                DTWorck = GetAllItems();
-                dataGridViewWorck.DataSource = DTWorck;
+                DataTableWork = GetAllItemsWork();
+                dataGridViewWorck.DataSource = DataTableWork;
                 MessageBox.Show("Selected item deleted successfully...");
             }
             else
@@ -147,6 +156,7 @@ namespace CSharpMySqlSample
                 MessageBox.Show("You must select entire row in order to delete it.");
             }
         }
+
         private void cmb_Main_Exit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -154,9 +164,9 @@ namespace CSharpMySqlSample
 
         private void dataGridViewWorck_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+            SetZeroVlaue();
             if (e.ColumnIndex == 1)
             {
-                SetZeroVlaue();
                 FormBu FBu = new FormBu();
                 FBu.ShowDialog();
                 dataGridViewWorck.SelectedCells[0].Value = FBu.ReturnValueBu;
@@ -191,10 +201,8 @@ namespace CSharpMySqlSample
                 FLin.ShowDialog();
                 dataGridViewWorck.SelectedCells[0].Value = FLin.ReturnValueLin;
             }
-
             try
             {
-                //SetZeroVlaue();
                 int SelectedRowIndex = e.RowIndex;
                 //Save records in database using DTItems which is datasource for Grid
                 Int32 curentSum;
@@ -204,7 +212,7 @@ namespace CSharpMySqlSample
                 {
                     dataGridViewWorck.Rows[SelectedRowIndex].Cells["Total"].Value = 0;
                 }
-                //7 di 14
+                //7 do 14
                 newSum = Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_39"].Value.ToString())
                        + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_40"].Value.ToString())
                        + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_41"].Value.ToString())
@@ -213,7 +221,6 @@ namespace CSharpMySqlSample
                        + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_44"].Value.ToString())
                        + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_45"].Value.ToString())
                        + Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["No_46"].Value.ToString());
-
                 curentSum = Int32.Parse(dataGridViewWorck.Rows[SelectedRowIndex].Cells["Total"].Value.ToString());
                 if (newSum != curentSum)
                 {
@@ -222,27 +229,9 @@ namespace CSharpMySqlSample
             }
             catch (Exception ex)
             {
-                //SetZeroVlaue();
                 MessageBox.Show("" + ex);
                 //throw;
             }
         }
-
-        public void SetZeroVlaue()
-        {
-            int lastRecortIndex = dataGridViewWorck.NewRowIndex;
-            if (dataGridViewWorck.SelectedCells[0].Value == DBNull.Value)
-            {
-                for (int numbers = 7; numbers < 15; numbers++)
-                {
-                    dataGridViewWorck.Rows[lastRecortIndex].Cells[numbers].Value = 0;
-                }
-            }
-        }
-
-        //private void dataGridViewWorck_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        //{
-
-        //}
     }
 }
