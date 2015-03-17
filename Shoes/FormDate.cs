@@ -5,21 +5,23 @@
     {
         public FormDate()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
         public string ReturnValueDate
         {
             get
             {
-                string theDate = monthCalendar.SelectionRange.Start.ToString("yyyy-MM-dd");
-                return theDate;
+                return this.monthCalendar.SelectionRange.Start.ToString("yyyy-MM-dd");
             }
-            set { value = monthCalendar.SelectionRange.Start.ToString("yyyy-MM-dd"); }
+            set 
+            { 
+                value = this.monthCalendar.SelectionRange.Start.ToString("yyyy-MM-dd"); 
+            }
         }
 
         private void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            this.Close();
+            base.Close();
         }  
 
     }

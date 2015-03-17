@@ -44,6 +44,7 @@
             this.cmb_Save.TabIndex = 9;
             this.cmb_Save.Text = "Save";
             this.cmb_Save.UseVisualStyleBackColor = true;
+            this.cmb_Save.Click += new System.EventHandler(this.cmb_Save_Click);
             // 
             // cmb_Delete
             // 
@@ -54,6 +55,7 @@
             this.cmb_Delete.TabIndex = 8;
             this.cmb_Delete.Text = "Delete Select";
             this.cmb_Delete.UseVisualStyleBackColor = true;
+            this.cmb_Delete.Click += new System.EventHandler(this.cmb_Delete_Click);
             // 
             // cmb_Exit
             // 
@@ -77,6 +79,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(1267, 611);
             this.dataGridView.TabIndex = 10;
+            this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
             // 
             // FormLave
             // 
@@ -87,10 +90,11 @@
             this.Controls.Add(this.cmb_Save);
             this.Controls.Add(this.cmb_Delete);
             this.Controls.Add(this.cmb_Exit);
-            this.Location = new System.Drawing.Point(0, 50);
+            this.Location = new System.Drawing.Point(0, 80);
             this.Name = "FormLave";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormLave";
+            this.Load += new System.EventHandler(this.FormLave_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

@@ -39,5 +39,11 @@
             //FormDate FDate = new FormDate();
             //FDate.ShowDialog();
         }
+
+        private void cmb_Check_Click(object sender, EventArgs e)
+        {
+            FormCheck FCheck = new FormCheck();
+            FCheck.ShowDialog();
+        }
     }
 }

@@ -12,37 +12,37 @@
         }
 
         //Read connection string from application settings = App.config.xml
-        string ConnectionString = Connection.MyConnectionString;
-        MySqlConnection connection;
-        MySqlDataAdapter adapterFoundo;
-        DataTable DTFoundo;
+        private string ConnectionString = Connection.MyConnectionString;
+        private MySqlConnection connection;
+        private MySqlDataAdapter adapterFoundo;
+        private DataTable DTFoundo;
 
-        DataTable GetAllItems()
+        private DataTable GetAllItems()
         {
             try
             {
                 //prepare query to get all records from foundo table
                 //prepare adapter to run query
-                adapterFoundo = new MySqlDataAdapter(Connection.TableFoundo, connection);
+                this.adapterFoundo = new MySqlDataAdapter(Connection.TableFoundo, this.connection);
                 DataSet DSFoundo = new DataSet();
                 //get query results in dataset
-                adapterFoundo.Fill(DSFoundo);
+                this.adapterFoundo.Fill(DSFoundo);
 
                 // Set the UPDATE command and parameters.
-                adapterFoundo.UpdateCommand = new MySqlCommand("UPDATE foundo SET ID=@ID, F_Name=@F_Name, Updated_Dt=NOW() WHERE ID=@ID;", connection);
-                adapterFoundo.UpdateCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
-                adapterFoundo.UpdateCommand.Parameters.Add("@F_Name", MySqlDbType.VarChar, 15, "F_Name");
-                adapterFoundo.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
+                this.adapterFoundo.UpdateCommand = new MySqlCommand("UPDATE foundo SET ID=@ID, F_Name=@F_Name, Updated_Dt=NOW() WHERE ID=@ID;", this.connection);
+                this.adapterFoundo.UpdateCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
+                this.adapterFoundo.UpdateCommand.Parameters.Add("@F_Name", MySqlDbType.VarChar, 15, "F_Name");
+                this.adapterFoundo.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the INSERT command and parameter.
-                adapterFoundo.InsertCommand = new MySqlCommand("INSERT INTO foundo VALUES (@ID, @F_Name, NOW());", connection);
-                adapterFoundo.InsertCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
-                adapterFoundo.InsertCommand.Parameters.Add("@F_Name", MySqlDbType.VarChar, 15, "F_Name");
-                adapterFoundo.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
+                this.adapterFoundo.InsertCommand = new MySqlCommand("INSERT INTO foundo VALUES (@ID, @F_Name, NOW());", this.connection);
+                this.adapterFoundo.InsertCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
+                this.adapterFoundo.InsertCommand.Parameters.Add("@F_Name", MySqlDbType.VarChar, 15, "F_Name");
+                this.adapterFoundo.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the DELETE command and parameter.
-                adapterFoundo.DeleteCommand = new MySqlCommand("DELETE FROM foundo WHERE ID=@ID;", connection);
-                adapterFoundo.DeleteCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
+                this.adapterFoundo.DeleteCommand = new MySqlCommand("DELETE FROM foundo WHERE ID=@ID;", this.connection);
+                this.adapterFoundo.DeleteCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
 
                 //return datatable with all records
                 return DSFoundo.Tables[0];
@@ -57,16 +57,16 @@
         private void FormFoundo_Load(object sender, EventArgs e)
         {
             //Initialize mysql connection
-            connection = new MySqlConnection(ConnectionString);
+            this.connection = new MySqlConnection(this.ConnectionString);
             //Get all items in datatable
-            DTFoundo = GetAllItems();
+            this.DTFoundo = this.GetAllItems();
             //Fill grid with items
-            dataGridViewFon.DataSource = DTFoundo;
+            this.dataGridViewFon.DataSource = this.DTFoundo;
             
         }
         private void cmb_Foundo_Exit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            base.Close();
         }
 
         private void cmb_Save_Fou_Click(object sender, EventArgs e)
@@ -74,30 +74,29 @@
             try
             {
                 //Save records in database using DTArticle which is datasource for Grid
-                adapterFoundo.Update(DTFoundo);
+                this.adapterFoundo.Update(this.DTFoundo);
                 //Refresh grid
-                DTFoundo = GetAllItems();
-                dataGridViewFon.DataSource = DTFoundo;
+                this.DTFoundo = this.GetAllItems();
+                this.dataGridViewFon.DataSource = this.DTFoundo;
                 MessageBox.Show("Items saved successfully...");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void cmb_Delete_Fou_Click(object sender, EventArgs e)
         {
-            if (dataGridViewFon.SelectedRows.Count > 0)
+            if (this.dataGridViewFon.SelectedRows.Count > 0)
             {
                 //Delete a row from grid first.
-                dataGridViewFon.Rows.Remove(dataGridViewFon.SelectedRows[0]);
+                this.dataGridViewFon.Rows.Remove(this.dataGridViewFon.SelectedRows[0]);
                 //Save records again. This will delete record from database.
-                adapterFoundo.Update(DTFoundo);
+                this.adapterFoundo.Update(this.DTFoundo);
                 //Refresh grid. Get items Bu again from database and show it in grid.
-                DTFoundo = GetAllItems();
-                dataGridViewFon.DataSource = DTFoundo;
+                this.DTFoundo = this.GetAllItems();
+                this.dataGridViewFon.DataSource = this.DTFoundo;
                 MessageBox.Show("Selected item deleted successfully...");
             }
             else
@@ -108,29 +107,31 @@
 
         private void dataGridViewFon_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            this.Close();
+            base.Close();
         }
         public int ReturnValueFon 
         { 
             get 
             {
+                int result;
                 try
                 {
-                    return int.Parse(dataGridViewFon.SelectedCells[0].Value.ToString()); 
+                    result = int.Parse(this.dataGridViewFon.SelectedCells[0].Value.ToString()); 
                 }
                 catch (FormatException ex)
                 {
                     MessageBox.Show("Must be select First Column\n" + ex.Message);
-                    return 0;
+                    result = 0;
                 }
                 catch (NullReferenceException)
                 {
-                    return 0;
+                    result = 0;
                 }
+                return result;
             }
             set
             {
-                ReturnValueFon = 0;
+                this.ReturnValueFon = 0;
             }
             
         }

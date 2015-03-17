@@ -34,6 +34,7 @@
             this.cmb_Manufacturing = new System.Windows.Forms.Button();
             this.cmb_Invoiced = new System.Windows.Forms.Button();
             this.cmb_Close = new System.Windows.Forms.Button();
+            this.cmb_Check = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cmb_Work
@@ -71,10 +72,18 @@
             this.cmb_Close.UseVisualStyleBackColor = true;
             this.cmb_Close.Click += new System.EventHandler(this.cmb_Close_Click);
             // 
+            // cmb_Check
+            // 
+            resources.ApplyResources(this.cmb_Check, "cmb_Check");
+            this.cmb_Check.Name = "cmb_Check";
+            this.cmb_Check.UseVisualStyleBackColor = true;
+            this.cmb_Check.Click += new System.EventHandler(this.cmb_Check_Click);
+            // 
             // FormLogIn
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmb_Check);
             this.Controls.Add(this.cmb_Close);
             this.Controls.Add(this.cmb_Invoiced);
             this.Controls.Add(this.cmb_Manufacturing);
@@ -94,6 +103,7 @@
         private System.Windows.Forms.Button cmb_Manufacturing;
         private System.Windows.Forms.Button cmb_Invoiced;
         private System.Windows.Forms.Button cmb_Close;
+        private System.Windows.Forms.Button cmb_Check;
     }
 }
 

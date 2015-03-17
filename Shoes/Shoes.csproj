@@ -61,6 +61,12 @@
     <Compile Include="FormBu.Designer.cs">
       <DependentUpon>FormBu.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCheck.Designer.cs">
+      <DependentUpon>FormCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormDate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormBu.resx">
       <DependentUpon>FormBu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCheck.resx">
+      <DependentUpon>FormCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormDate.resx">
       <DependentUpon>FormDate.cs</DependentUpon>

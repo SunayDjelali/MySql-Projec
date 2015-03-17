@@ -1,5 +1,7 @@
 ﻿namespace Shoes
 {
+    using System;
+    using System.Configuration;
     using System.Threading.Tasks;
 
     public class Connection
@@ -19,21 +21,28 @@
         {
             get
             {
-                return System.Configuration.ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
+                return ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             }
         }
-        public static string TableWorck { get { return worck; } }
-        public static string TableLeave { get { return leave; } }
-        public static string TableManufactured { get { return manufactured; } }
-        public static string TableDBInvoced { get { return invoiced; } }
-        public static string TableBu { get { return bu; } }
-        public static string TableArticle { get { return article; } }
-        public static string TableLavoratione { get { return lavoratione; } }
-        public static string TableVersions { get { return versions; } }
-        public static string TableFoundo { get { return foundo; } }
-        public static string TableLinia { get { return linia; } }
-
-
-
+        public static string TableWorck { get { return Connection.worck; } }
+        public static string TableLeave 
+        { 
+            get 
+            {
+                return Connection.leave; 
+            } 
+            set
+            {
+                Connection.leave = value;
+            } 
+        }
+        public static string TableManufactured { get { return Connection.manufactured; } }
+        public static string TableDBInvoced { get { return Connection.invoiced; } }
+        public static string TableBu { get { return Connection.bu; } }
+        public static string TableArticle { get { return Connection.article; } }
+        public static string TableLavoratione { get { return Connection.lavoratione; } }
+        public static string TableVersions { get { return Connection.versions; } }
+        public static string TableFoundo { get { return Connection.foundo; } }
+        public static string TableLinia { get { return Connection.linia; } }
      }
 }

@@ -11,35 +11,35 @@
             InitializeComponent();
         }
         //Read connection string from application settings 
-        string ConnectionString = Connection.MyConnectionString;
-        MySqlConnection connection;
-        MySqlDataAdapter adapterLavoratione;
-        DataTable DTLavoratione;
+        private string ConnectionString = Connection.MyConnectionString;
+        private MySqlConnection connection;
+        private MySqlDataAdapter adapterLavoratione;
+        private DataTable DTLavoratione;
 
-        DataTable GetAllItems()
+        private DataTable GetAllItems()
         {
             try
             {
                 //prepare query to get all records from Lavoratione table
                 //prepare adapter to run query
-                adapterLavoratione = new MySqlDataAdapter(Connection.TableLavoratione, connection);
+                this.adapterLavoratione = new MySqlDataAdapter(Connection.TableLavoratione, this.connection);
                 DataSet DSLavoratione = new DataSet();
                 //get query results in dataset
-                adapterLavoratione.Fill(DSLavoratione);
+                this.adapterLavoratione.Fill(DSLavoratione);
 
                 // Set the UPDATE command and parameters.
-                adapterLavoratione.UpdateCommand = new MySqlCommand("UPDATE lavoratione SET Lavoratoine=@Lavoratoine, Updated_Dt=NOW() WHERE Lavoratoine=@Lavoratoine;", connection);
-                adapterLavoratione.UpdateCommand.Parameters.Add("@Lavoratoine", MySqlDbType.Int32, 11, "Lavoratoine");
-                adapterLavoratione.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
+                this.adapterLavoratione.UpdateCommand = new MySqlCommand("UPDATE lavoratione SET Lavoratoine=@Lavoratoine, Updated_Dt=NOW() WHERE Lavoratoine=@Lavoratoine;", connection);
+                this.adapterLavoratione.UpdateCommand.Parameters.Add("@Lavoratoine", MySqlDbType.Int32, 11, "Lavoratoine");
+                this.adapterLavoratione.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the INSERT command and parameter.
-                adapterLavoratione.InsertCommand = new MySqlCommand("INSERT INTO lavoratione VALUES (@Lavoratoine, NOW());", connection);
-                adapterLavoratione.InsertCommand.Parameters.Add("@Lavoratoine", MySqlDbType.Int32, 11, "Lavoratoine");
-                adapterLavoratione.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
+                this.adapterLavoratione.InsertCommand = new MySqlCommand("INSERT INTO lavoratione VALUES (@Lavoratoine, NOW());", this.connection);
+                this.adapterLavoratione.InsertCommand.Parameters.Add("@Lavoratoine", MySqlDbType.Int32, 11, "Lavoratoine");
+                this.adapterLavoratione.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the DELETE command and parameter.
-                adapterLavoratione.DeleteCommand = new MySqlCommand("DELETE FROM lavoratione WHERE Lavoratoine=@Lavoratoine;", connection);
-                adapterLavoratione.DeleteCommand.UpdatedRowSource = UpdateRowSource.None;
+                this.adapterLavoratione.DeleteCommand = new MySqlCommand("DELETE FROM lavoratione WHERE Lavoratoine=@Lavoratoine;", this.connection);
+                this.adapterLavoratione.DeleteCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 //return datatable with all records
                 return DSLavoratione.Tables[0];
@@ -55,11 +55,11 @@
         private void FormLavor_Load(object sender, EventArgs e)
         {
             //Initialize mysql connection
-            connection = new MySqlConnection(ConnectionString);
+            this.connection = new MySqlConnection(this.ConnectionString);
             //Get all items in datatable
-            DTLavoratione = GetAllItems();
+            this.DTLavoratione = this.GetAllItems();
             //Fill grid with items from Lavoratione
-            dataGridViewLav.DataSource = DTLavoratione;
+            this.dataGridViewLav.DataSource = this.DTLavoratione;
         }
 
         private void cmb_Save_Lav_Click(object sender, EventArgs e)
@@ -67,10 +67,10 @@
             try
             {
                 //Save records in database using DTLavoratione which is datasource for Grid
-                adapterLavoratione.Update(DTLavoratione);
+                this.adapterLavoratione.Update(this.DTLavoratione);
                 //Refresh grid 
-                DTLavoratione = GetAllItems();
-                dataGridViewLav.DataSource = DTLavoratione;
+                this.DTLavoratione = this.GetAllItems();
+                this.dataGridViewLav.DataSource = this.DTLavoratione;
                 MessageBox.Show("Items saved successfully...");
             }
             catch (Exception ex)
@@ -81,15 +81,15 @@
 
         private void cmb_Delete_Lav_Click(object sender, EventArgs e)
         {
-            if (dataGridViewLav.SelectedRows.Count > 0)
+            if (this.dataGridViewLav.SelectedRows.Count > 0)
             {
                 //Delete a row from grid first.
-                dataGridViewLav.Rows.Remove(dataGridViewLav.SelectedRows[0]);
+                this.dataGridViewLav.Rows.Remove(this.dataGridViewLav.SelectedRows[0]);
                 //Save records again. This will delete record from database.
-                adapterLavoratione.Update(DTLavoratione);
+                this.adapterLavoratione.Update(this.DTLavoratione);
                 //Refresh grid. Get items again from database and show it in grid.
-                DTLavoratione = GetAllItems();
-                dataGridViewLav.DataSource = DTLavoratione;
+                this.DTLavoratione = this.GetAllItems();
+                this.dataGridViewLav.DataSource = this.DTLavoratione;
                 MessageBox.Show("Selected item deleted successfully...");
             }
             else
@@ -100,36 +100,33 @@
         }
         private void cmb_Lavor_Exit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            base.Close();
         }
 
         private void dataGridViewLav_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            this.Close();
+            base.Close();
         }
         public int ReturnValueLav 
         { 
             get 
             {
+                int result;
                 try
                 {
-                    return int.Parse(dataGridViewLav.SelectedCells[0].Value.ToString()); 
+                    result = int.Parse(this.dataGridViewLav.SelectedCells[0].Value.ToString()); 
                 }
                 catch (FormatException ex)
                 {
                     MessageBox.Show("Must be select First Column\n" + ex.Message);
-                    return 0;
+                    result = 0;
                 }
                 catch (NullReferenceException)
                 {
-                    return 0;
+                    result = 0;
                 }
+                return result;
             }
-            set
-            {
-                ReturnValueLav = 0;
-            }
-           
         }
     }
 }

@@ -12,35 +12,35 @@
         }
 
         //Read connection string from application settings = App.config.xml
-        string ConnectionString = Connection.MyConnectionString;
-        MySqlConnection connection;
-        MySqlDataAdapter adapterArticle;
-        DataTable DTArticle;
+        private string ConnectionString = Connection.MyConnectionString;
+        private MySqlConnection connection;
+        private MySqlDataAdapter adapterArticle;
+        private DataTable DTArticle;
 
-        DataTable GetAllItems()
+        private DataTable GetAllItems()
         {
             try
             {
                 //prepare query to get all records from Article table
                 //prepare adapter to run query
-                adapterArticle = new MySqlDataAdapter(Connection.TableArticle, connection);
+                this.adapterArticle = new MySqlDataAdapter(Connection.TableArticle, this.connection);
                 DataSet DSArticle = new DataSet();
                 //get query results in dataset
-                adapterArticle.Fill(DSArticle);
+                this.adapterArticle.Fill(DSArticle);
 
                 // Set the UPDATE command and parameters.
-                adapterArticle.UpdateCommand = new MySqlCommand("UPDATE article SET ArticleNo=@ArticleNo, Updated_Dt=NOW() WHERE ArticleNo=@ArticleNo;", connection);
-                adapterArticle.UpdateCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
-                adapterArticle.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
+                this.adapterArticle.UpdateCommand = new MySqlCommand("UPDATE article SET ArticleNo=@ArticleNo, Updated_Dt=NOW() WHERE ArticleNo=@ArticleNo;", this.connection);
+                this.adapterArticle.UpdateCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
+                this.adapterArticle.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the INSERT command and parameter.
-                adapterArticle.InsertCommand = new MySqlCommand("INSERT INTO article VALUES (@ArticleNo, NOW());", connection);
-                adapterArticle.InsertCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
-                adapterArticle.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
+                this.adapterArticle.InsertCommand = new MySqlCommand("INSERT INTO article VALUES (@ArticleNo, NOW());", this.connection);
+                this.adapterArticle.InsertCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
+                this.adapterArticle.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the DELETE command and parameter.
-                adapterArticle.DeleteCommand = new MySqlCommand("DELETE FROM article WHERE ArticleNo=@ArticleNo;", connection);
-                adapterArticle.DeleteCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
+                this.adapterArticle.DeleteCommand = new MySqlCommand("DELETE FROM article WHERE ArticleNo=@ArticleNo;", this.connection);
+                this.adapterArticle.DeleteCommand.Parameters.Add("@ArticleNo", MySqlDbType.Int32, 11, "ArticleNo");
 
                 //return datatable with all records
                 return DSArticle.Tables[0];
@@ -60,11 +60,11 @@
         private void FormArticle_Load(object sender, EventArgs e)
         {
             //Initialize mysql connection
-            connection = new MySqlConnection(ConnectionString);
+            this.connection = new MySqlConnection(this.ConnectionString);
             //Get all items in datatable
-            DTArticle = GetAllItems();
+            this.DTArticle = this.GetAllItems();
             //Fill grid with items
-            dataGridViewArt.DataSource = DTArticle;
+            this.dataGridViewArt.DataSource = this.DTArticle;
             //dataGridViewArt.ClearSelection(); 
         }
 
@@ -73,10 +73,10 @@
             try
             {
                 //Save records in database using DTArticle which is datasource for Grid
-                adapterArticle.Update(DTArticle);
+                this.adapterArticle.Update(this.DTArticle);
                 //Refresh grid
-                DTArticle = GetAllItems();
-                dataGridViewArt.DataSource = DTArticle;
+                this.DTArticle = this.GetAllItems();
+                this.dataGridViewArt.DataSource = this.DTArticle;
                 MessageBox.Show("Items saved successfully...");
             }
             catch (Exception ex)
@@ -87,15 +87,15 @@
 
         private void cmb_Delete_Art_Click(object sender, EventArgs e)
         {
-            if (dataGridViewArt.SelectedRows.Count > 0)
+            if (this.dataGridViewArt.SelectedRows.Count > 0)
             {
                 //Delete a row from grid first.
-                dataGridViewArt.Rows.Remove(dataGridViewArt.SelectedRows[0]);
+                this.dataGridViewArt.Rows.Remove(this.dataGridViewArt.SelectedRows[0]);
                 //Save records again. This will delete record from database.
-                adapterArticle.Update(DTArticle);
+                this.adapterArticle.Update(this.DTArticle);
                 //Refresh grid. Get items Bu again from database and show it in grid.
-                DTArticle = GetAllItems();
-                dataGridViewArt.DataSource = DTArticle;
+                this.DTArticle = this.GetAllItems();
+                this.dataGridViewArt.DataSource = this.DTArticle;
                 MessageBox.Show("Selected item deleted successfully...");
             }
             else
@@ -106,29 +106,27 @@
 
         private void dataGridViewArt_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            this.Close();
+            base.Close();
         }
         public int ReturnValueArt 
         {
             get
             {
+                int result;
                 try
                 {
-                    //if (one)
-                    //{
-                    //    this.Close();
-                    //}
-                    return int.Parse(dataGridViewArt.SelectedCells[0].Value.ToString());
+                    result = int.Parse(this.dataGridViewArt.SelectedCells[0].Value.ToString());
                 }
                 catch (FormatException ex)
                 {
                     MessageBox.Show("Must be select First Column\n" + ex.Message);
-                    return 0;
+                    result = 0;
                 }
                 catch (NullReferenceException) 
                 {
-                    return 0;
+                    result = 0;
                 }
+                return result;
             } 
         }
     }

@@ -90,10 +90,10 @@
             this.Controls.Add(this.cmb_Delete);
             this.Controls.Add(this.cmb_Exit);
             this.Controls.Add(this.dataGridView);
-            this.Location = new System.Drawing.Point(0, 50);
+            this.Location = new System.Drawing.Point(0, 80);
             this.Name = "FormWork";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "FormWork";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.FormWork_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

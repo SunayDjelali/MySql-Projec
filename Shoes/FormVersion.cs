@@ -10,40 +10,39 @@
         {
             InitializeComponent();
         }
-
         //Read connection string from application settings = App.config.xml
-        string ConnectionString = Connection.MyConnectionString;
-        MySqlConnection connection;
-        MySqlDataAdapter adapterVersion;
-        DataTable DTVersion;
+        private string ConnectionString = Connection.MyConnectionString;
+        private MySqlConnection connection;
+        private MySqlDataAdapter adapterVersion;
+        private DataTable DTVersion;
 
-        DataTable GetAllItems()
+        private DataTable GetAllItems()
         {
             try
             {
                 //prepare query to get all records from versions table
                 //prepare adapter to run query
-                adapterVersion = new MySqlDataAdapter(Connection.TableVersions, connection);
+                this.adapterVersion = new MySqlDataAdapter(Connection.TableVersions, this.connection);
                 DataSet DSVersion = new DataSet();
 
                 //get query results in dataset
-                adapterVersion.Fill(DSVersion);
+                this.adapterVersion.Fill(DSVersion);
 
                 // Set the UPDATE command and parameters.
-                adapterVersion.UpdateCommand = new MySqlCommand("UPDATE versions SET ID=@ID, Version=@Version, Updated_Dt=NOW() WHERE ID=@ID;", connection);
-                adapterVersion.UpdateCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
-                adapterVersion.UpdateCommand.Parameters.Add("@Version", MySqlDbType.VarChar, 10, "Version");
-                adapterVersion.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
+                this.adapterVersion.UpdateCommand = new MySqlCommand("UPDATE versions SET ID=@ID, Version=@Version, Updated_Dt=NOW() WHERE ID=@ID;", this.connection);
+                this.adapterVersion.UpdateCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
+                this.adapterVersion.UpdateCommand.Parameters.Add("@Version", MySqlDbType.VarChar, 10, "Version");
+                this.adapterVersion.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the INSERT command and parameter.
-                adapterVersion.InsertCommand = new MySqlCommand("INSERT INTO versions VALUES (@ID, @Version, NOW());", connection);
-                adapterVersion.InsertCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
-                adapterVersion.InsertCommand.Parameters.Add("@Version", MySqlDbType.VarChar, 10, "Version");
-                adapterVersion.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
+                this.adapterVersion.InsertCommand = new MySqlCommand("INSERT INTO versions VALUES (@ID, @Version, NOW());", this.connection);
+                this.adapterVersion.InsertCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
+                this.adapterVersion.InsertCommand.Parameters.Add("@Version", MySqlDbType.VarChar, 10, "Version");
+                this.adapterVersion.InsertCommand.UpdatedRowSource = UpdateRowSource.None;
 
                 // Set the DELETE command and parameter.
-                adapterVersion.DeleteCommand = new MySqlCommand("DELETE FROM versions WHERE ID=@ID;", connection);
-                adapterVersion.DeleteCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
+                this.adapterVersion.DeleteCommand = new MySqlCommand("DELETE FROM versions WHERE ID=@ID;", this.connection);
+                this.adapterVersion.DeleteCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
 
                 //return datatable with all records
                 return DSVersion.Tables[0];
@@ -57,19 +56,19 @@
 
         private void cmb_Version_Exit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            base.Close();
         }
 
         private void FormVersion_Load(object sender, EventArgs e)
         {
             //Initialize mysql connection
-            connection = new MySqlConnection(ConnectionString);
+            this.connection = new MySqlConnection(this.ConnectionString);
 
             //Get all items in datatable
-            DTVersion = GetAllItems();
+            this.DTVersion = this.GetAllItems();
 
             //Fill grid with items
-            dataGridViewVer.DataSource = DTVersion;
+            this.dataGridViewVer.DataSource = this.DTVersion;
         }
 
         private void cmb_Save_Ver_Click(object sender, EventArgs e)
@@ -77,12 +76,12 @@
             try
             {
                 //Save records in database using DTArticle which is datasource for Grid
-                adapterVersion.Update(DTVersion);
+                this.adapterVersion.Update(DTVersion);
 
                 //Refresh grid
-                DTVersion = GetAllItems();
+                this.DTVersion = this.GetAllItems();
 
-                dataGridViewVer.DataSource = DTVersion;
+                this.dataGridViewVer.DataSource = this.DTVersion;
 
                 MessageBox.Show("Items saved successfully...");
             }
@@ -90,23 +89,22 @@
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void cmb_Delete_Ver_Click(object sender, EventArgs e)
         {
-            if (dataGridViewVer.SelectedRows.Count > 0)
+            if (this.dataGridViewVer.SelectedRows.Count > 0)
             {
                 //Delete a row from grid first.
-                dataGridViewVer.Rows.Remove(dataGridViewVer.SelectedRows[0]);
+                this.dataGridViewVer.Rows.Remove(this.dataGridViewVer.SelectedRows[0]);
 
                 //Save records again. This will delete record from database.
-                adapterVersion.Update(DTVersion);
+                this.adapterVersion.Update(this.DTVersion);
 
                 //Refresh grid. Get items Bu again from database and show it in grid.
-                DTVersion = GetAllItems();
+                this.DTVersion = this.GetAllItems();
 
-                dataGridViewVer.DataSource = DTVersion;
+                this.dataGridViewVer.DataSource = this.DTVersion;
 
                 MessageBox.Show("Selected item deleted successfully...");
             }
@@ -114,33 +112,32 @@
             {
                 MessageBox.Show("You must select entire row in order to delete it.");
             }
-
         }
+
         private void dataGridViewVer_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            this.Close();
+            base.Close();
         }
+
         public int ReturnValueVer 
         {
             get
             {
+                int result;
                 try
                 {
-                    return int.Parse(dataGridViewVer.SelectedCells[0].Value.ToString());
+                    result = int.Parse(dataGridViewVer.SelectedCells[0].Value.ToString());
                 }
                 catch (FormatException ex)
                 {
                     MessageBox.Show("Must be select First Column\n" + ex.Message);
-                    return 0;
+                    result = 0;
                 }
                 catch (NullReferenceException)
                 {
-                    return 0;
+                    result = 0;
                 }
-            }
-            set
-            {
-                ReturnValueVer = 0;
+                return result;
             }
         }
     }
