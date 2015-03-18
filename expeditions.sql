@@ -1,22 +1,22 @@
-﻿/*
+/*
 Navicat MySQL Data Transfer
 
-Source Server         : LocalHost
-Source Server Version : 50616
-Source Host           : localhost:3306
+Source Server         : localhost
+Source Server Version : 50620
+Source Host           : 127.0.0.1:3306
 Source Database       : expeditions
 
 Target Server Type    : MYSQL
-Target Server Version : 50616
+Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2014-10-08 12:57:33
+Date: 2015-03-18 19:08:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `article`
+-- Table structure for article
 -- ----------------------------
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
@@ -39,9 +39,10 @@ INSERT INTO `article` VALUES ('37153', '2014-09-22 12:41:48');
 INSERT INTO `article` VALUES ('37154', '2014-09-22 12:41:48');
 INSERT INTO `article` VALUES ('37155', '2014-09-22 12:41:48');
 INSERT INTO `article` VALUES ('37159', '2014-09-21 16:03:40');
+INSERT INTO `article` VALUES ('38000', '2014-10-14 21:29:21');
 
 -- ----------------------------
--- Table structure for `bu`
+-- Table structure for bu
 -- ----------------------------
 DROP TABLE IF EXISTS `bu`;
 CREATE TABLE `bu` (
@@ -50,7 +51,7 @@ CREATE TABLE `bu` (
   `Updated_Dt` datetime DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `Date` (`Date`)
-) ENGINE=InnoDB AUTO_INCREMENT=482 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=483 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bu
@@ -59,9 +60,53 @@ INSERT INTO `bu` VALUES ('477', '2014-09-03', '2014-09-22 11:59:39');
 INSERT INTO `bu` VALUES ('478', '2014-09-10', '2014-09-21 16:00:04');
 INSERT INTO `bu` VALUES ('480', '2014-09-17', '2014-09-22 11:59:55');
 INSERT INTO `bu` VALUES ('481', '2014-09-24', '2014-10-01 10:27:16');
+INSERT INTO `bu` VALUES ('482', '2014-09-28', '2014-10-11 22:52:28');
 
 -- ----------------------------
--- Table structure for `foundo`
+-- Table structure for expedirani
+-- ----------------------------
+DROP TABLE IF EXISTS `expedirani`;
+CREATE TABLE `expedirani` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Bu_ID` int(11) NOT NULL,
+  `Article_ID` int(11) NOT NULL,
+  `Lavoratione_ID` int(11) NOT NULL,
+  `Versions_ID` int(11) NOT NULL,
+  `Foundo_ID` int(11) NOT NULL,
+  `Linia_ID` int(11) NOT NULL,
+  `No_39` int(11) NOT NULL,
+  `No_40` int(11) NOT NULL,
+  `No_41` int(11) NOT NULL,
+  `No_42` int(11) NOT NULL,
+  `No_43` int(11) NOT NULL,
+  `No_44` int(11) NOT NULL,
+  `No_45` int(11) NOT NULL,
+  `No_46` int(11) NOT NULL,
+  `Total` int(11) DEFAULT NULL,
+  `Updated_Dt` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `fk_bu_idx` (`Bu_ID`),
+  KEY `fk_lavoratione_idx` (`Lavoratione_ID`),
+  KEY `fk_versions_idx` (`Versions_ID`),
+  KEY `fk_foundo_idx` (`Foundo_ID`),
+  KEY `fk_linia_idx` (`Linia_ID`),
+  KEY `fk_article_idx` (`Article_ID`),
+  CONSTRAINT `expedirani_ibfk_1` FOREIGN KEY (`Foundo_ID`) REFERENCES `foundo` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `expedirani_ibfk_2` FOREIGN KEY (`Lavoratione_ID`) REFERENCES `lavoratione` (`Lavoratoine`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `expedirani_ibfk_3` FOREIGN KEY (`Versions_ID`) REFERENCES `versions` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `expedirani_ibfk_4` FOREIGN KEY (`Bu_ID`) REFERENCES `bu` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `expedirani_ibfk_5` FOREIGN KEY (`Linia_ID`) REFERENCES `linia` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `expedirani_ibfk_6` FOREIGN KEY (`Article_ID`) REFERENCES `article` (`ArticleNo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of expedirani
+-- ----------------------------
+INSERT INTO `expedirani` VALUES ('1', '477', '31600', '108399', '2', '2', '10', '50', '313', '407', '807', '807', '806', '407', '313', '3910', '2015-01-15 23:20:32');
+INSERT INTO `expedirani` VALUES ('2', '481', '31600', '108400', '2', '2', '10', '85', '855', '10', '647', '647', '647', '326', '266', '3483', '2015-01-16 21:21:41');
+
+-- ----------------------------
+-- Table structure for foundo
 -- ----------------------------
 DROP TABLE IF EXISTS `foundo`;
 CREATE TABLE `foundo` (
@@ -83,7 +128,7 @@ INSERT INTO `foundo` VALUES ('5', 'RELAY ENVAL', '2014-09-22 11:53:41');
 INSERT INTO `foundo` VALUES ('6', 'TRAVELER ENVAL', '2014-09-22 11:53:41');
 
 -- ----------------------------
--- Table structure for `lavoratione`
+-- Table structure for lavoratione
 -- ----------------------------
 DROP TABLE IF EXISTS `lavoratione`;
 CREATE TABLE `lavoratione` (
@@ -119,7 +164,50 @@ INSERT INTO `lavoratione` VALUES ('108861', '2014-10-01 10:28:56');
 INSERT INTO `lavoratione` VALUES ('108862', '2014-10-01 10:28:56');
 
 -- ----------------------------
--- Table structure for `linia`
+-- Table structure for leave
+-- ----------------------------
+DROP TABLE IF EXISTS `leave`;
+CREATE TABLE `leave` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Bu_ID` int(11) NOT NULL,
+  `Article_ID` int(11) NOT NULL,
+  `Lavoratione_ID` int(11) NOT NULL,
+  `Versions_ID` int(11) NOT NULL,
+  `Foundo_ID` int(11) NOT NULL,
+  `Linia_ID` int(11) NOT NULL,
+  `No_39` int(11) NOT NULL,
+  `No_40` int(11) NOT NULL,
+  `No_41` int(11) NOT NULL,
+  `No_42` int(11) NOT NULL,
+  `No_43` int(11) NOT NULL,
+  `No_44` int(11) NOT NULL,
+  `No_45` int(11) NOT NULL,
+  `No_46` int(11) NOT NULL,
+  `Total` int(11) DEFAULT NULL,
+  `Updated_Dt` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `fk_bu_idx` (`Bu_ID`),
+  KEY `fk_lavoratione_idx` (`Lavoratione_ID`),
+  KEY `fk_versions_idx` (`Versions_ID`),
+  KEY `fk_foundo_idx` (`Foundo_ID`),
+  KEY `fk_linia_idx` (`Linia_ID`),
+  KEY `fk_article_idx` (`Article_ID`),
+  CONSTRAINT `leave_ibfk_1` FOREIGN KEY (`Foundo_ID`) REFERENCES `foundo` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `leave_ibfk_2` FOREIGN KEY (`Lavoratione_ID`) REFERENCES `lavoratione` (`Lavoratoine`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `leave_ibfk_3` FOREIGN KEY (`Versions_ID`) REFERENCES `versions` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `leave_ibfk_4` FOREIGN KEY (`Bu_ID`) REFERENCES `bu` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `leave_ibfk_5` FOREIGN KEY (`Linia_ID`) REFERENCES `linia` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `leave_ibfk_6` FOREIGN KEY (`Article_ID`) REFERENCES `article` (`ArticleNo`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of leave
+-- ----------------------------
+INSERT INTO `leave` VALUES ('1', '477', '31600', '108399', '2', '2', '10', '18', '297', '396', '795', '794', '793', '392', '291', '3776', '2015-03-17 22:37:25');
+INSERT INTO `leave` VALUES ('2', '481', '31600', '108400', '2', '2', '10', '65', '755', '0', '47', '47', '47', '26', '0', '987', '2015-03-17 20:24:40');
+
+-- ----------------------------
+-- Table structure for linia
 -- ----------------------------
 DROP TABLE IF EXISTS `linia`;
 CREATE TABLE `linia` (
@@ -145,7 +233,7 @@ INSERT INTO `linia` VALUES ('10', '10 Шивалня', '2014-09-21 15:54:17');
 INSERT INTO `linia` VALUES ('11', '11 Шивалня', '2014-09-21 15:54:20');
 
 -- ----------------------------
--- Table structure for `manufactured`
+-- Table structure for manufactured
 -- ----------------------------
 DROP TABLE IF EXISTS `manufactured`;
 CREATE TABLE `manufactured` (
@@ -177,7 +265,7 @@ CREATE TABLE `manufactured` (
   CONSTRAINT `fk_Mani_Found` FOREIGN KEY (`Foundo_ID`) REFERENCES `foundo` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Mani_Lav` FOREIGN KEY (`Lavoratione_ID`) REFERENCES `lavoratione` (`Lavoratoine`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Mani_Linia` FOREIGN KEY (`Linia_ID`) REFERENCES `linia` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of manufactured
@@ -239,10 +327,12 @@ INSERT INTO `manufactured` VALUES ('78', '2014-10-06', '480', '37155', '108672',
 INSERT INTO `manufactured` VALUES ('79', '2014-10-06', '478', '37159', '108535', '4', '9', '0', '0', '0', '74', '90', '90', '0', '0', '254', '2014-10-07 09:59:45');
 INSERT INTO `manufactured` VALUES ('80', '2014-10-06', '477', '31600', '108399', '2', '10', '0', '0', '0', '37', '0', '0', '0', '0', '37', '2014-10-07 10:01:01');
 INSERT INTO `manufactured` VALUES ('81', '2014-10-06', '478', '31600', '108400', '2', '10', '0', '0', '0', '90', '60', '0', '0', '0', '150', '2014-10-07 10:03:43');
-INSERT INTO `manufactured` VALUES ('82', '2014-10-06', '477', '31600', '108399', '2', '11', '0', '0', '0', '0', '0', '30', '100', '0', '130', '2014-10-07 10:04:36');
+INSERT INTO `manufactured` VALUES ('131', '2015-03-16', '477', '31600', '108399', '2', '10', '8', '3', '7', '7', '7', '6', '7', '13', '58', '2015-03-17 22:15:36');
+INSERT INTO `manufactured` VALUES ('133', '2015-03-16', '477', '31600', '108399', '2', '10', '1', '2', '3', '4', '5', '6', '7', '8', '36', '2015-03-17 22:22:30');
+INSERT INTO `manufactured` VALUES ('134', '2015-03-16', '477', '31600', '108399', '2', '10', '1', '1', '1', '1', '1', '1', '1', '1', '8', '2015-03-17 22:32:30');
 
 -- ----------------------------
--- Table structure for `materialprice`
+-- Table structure for materialprice
 -- ----------------------------
 DROP TABLE IF EXISTS `materialprice`;
 CREATE TABLE `materialprice` (
@@ -257,7 +347,27 @@ CREATE TABLE `materialprice` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `versions`
+-- Table structure for tableinfo
+-- ----------------------------
+DROP TABLE IF EXISTS `tableinfo`;
+CREATE TABLE `tableinfo` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` int(10) NOT NULL,
+  `age` int(10) NOT NULL,
+  `sum` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tableinfo
+-- ----------------------------
+INSERT INTO `tableinfo` VALUES ('1', '1', '22', '0');
+INSERT INTO `tableinfo` VALUES ('2', '1', '22', '0');
+INSERT INTO `tableinfo` VALUES ('3', '1', '22', '0');
+INSERT INTO `tableinfo` VALUES ('4', '1', '22', '0');
+
+-- ----------------------------
+-- Table structure for versions
 -- ----------------------------
 DROP TABLE IF EXISTS `versions`;
 CREATE TABLE `versions` (
@@ -281,7 +391,7 @@ INSERT INTO `versions` VALUES ('7', '3090/018', '2014-09-22 12:44:46');
 INSERT INTO `versions` VALUES ('8', '7601/009', '2014-10-01 10:53:24');
 
 -- ----------------------------
--- Table structure for `worck`
+-- Table structure for worck
 -- ----------------------------
 DROP TABLE IF EXISTS `worck`;
 CREATE TABLE `worck` (
@@ -309,31 +419,16 @@ CREATE TABLE `worck` (
   KEY `fk_foundo_idx` (`Foundo_ID`),
   KEY `fk_linia_idx` (`Linia_ID`),
   KEY `fk_article_idx` (`Article_ID`),
-  CONSTRAINT `fk_bu` FOREIGN KEY (`Bu_ID`) REFERENCES `bu` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Foundo` FOREIGN KEY (`Foundo_ID`) REFERENCES `foundo` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Lavoration` FOREIGN KEY (`Lavoratione_ID`) REFERENCES `lavoratione` (`Lavoratoine`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_linia` FOREIGN KEY (`Linia_ID`) REFERENCES `linia` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_Versions` FOREIGN KEY (`Versions_ID`) REFERENCES `versions` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_bu` FOREIGN KEY (`Bu_ID`) REFERENCES `bu` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_linia` FOREIGN KEY (`Linia_ID`) REFERENCES `linia` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `worck_ibfk_1` FOREIGN KEY (`Article_ID`) REFERENCES `article` (`ArticleNo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of worck
 -- ----------------------------
-INSERT INTO `worck` VALUES ('1', '477', '31600', '108399', '2', '2', '10', '0', '313', '407', '807', '807', '806', '407', '313', '3860', '2014-09-23 10:54:44');
-INSERT INTO `worck` VALUES ('2', '477', '31600', '108400', '2', '2', '10', '0', '266', '326', '647', '647', '647', '326', '266', '3125', '2014-10-02 10:26:54');
-INSERT INTO `worck` VALUES ('3', '478', '37159', '108535', '1', '4', '9', '163', '333', '584', '704', '622', '392', '213', '84', '3095', '2014-09-25 12:35:51');
-INSERT INTO `worck` VALUES ('4', '478', '37159', '108536', '1', '4', '1', '129', '129', '130', '129', '130', '130', '129', '130', '1036', '2014-09-22 11:55:35');
-INSERT INTO `worck` VALUES ('5', '478', '37152', '108537', '2', '4', '8', '100', '192', '321', '371', '339', '234', '130', '66', '1753', '2014-09-25 12:37:32');
-INSERT INTO `worck` VALUES ('6', '478', '30420', '108538', '3', '1', '7', '0', '55', '55', '164', '164', '110', '55', '55', '658', '2014-09-25 12:36:16');
-INSERT INTO `worck` VALUES ('7', '478', '30421', '108539', '1', '1', '1', '14', '31', '58', '81', '75', '50', '30', '10', '349', '2014-09-30 10:43:52');
-INSERT INTO `worck` VALUES ('8', '478', '30421', '108540', '4', '1', '1', '10', '26', '48', '65', '61', '40', '23', '6', '279', '2014-09-30 10:44:27');
-INSERT INTO `worck` VALUES ('9', '478', '30390', '108541', '2', '1', '1', '60', '60', '60', '61', '62', '62', '62', '60', '487', '2014-09-21 19:37:48');
-INSERT INTO `worck` VALUES ('10', '478', '31600', '108542', '2', '2', '1', '301', '301', '301', '301', '301', '302', '301', '301', '2409', '2014-09-22 11:55:35');
-INSERT INTO `worck` VALUES ('11', '480', '37155', '108672', '5', '4', '8', '75', '160', '258', '296', '257', '168', '90', '39', '1343', '2014-10-07 09:26:00');
-INSERT INTO `worck` VALUES ('12', '480', '37154', '108673', '6', '3', '1', '103', '103', '103', '103', '103', '103', '104', '106', '828', '2014-09-22 13:10:49');
-INSERT INTO `worck` VALUES ('13', '480', '37153', '108674', '5', '3', '1', '86', '84', '84', '84', '84', '84', '84', '84', '674', '2014-09-22 13:10:49');
-INSERT INTO `worck` VALUES ('14', '480', '31600', '108675', '2', '2', '1', '328', '328', '328', '328', '331', '328', '328', '328', '2627', '2014-09-22 13:10:49');
-INSERT INTO `worck` VALUES ('15', '480', '31600', '108676', '2', '2', '1', '398', '398', '398', '404', '398', '398', '398', '398', '3190', '2014-09-22 13:10:49');
-INSERT INTO `worck` VALUES ('16', '481', '31600', '108857', '2', '2', '1', '97', '97', '97', '97', '97', '97', '97', '97', '776', '2014-10-01 10:43:30');
-INSERT INTO `worck` VALUES ('17', '481', '30421', '108860', '1', '1', '7', '22', '55', '127', '201', '184', '128', '74', '30', '821', '2014-10-02 10:26:55');
+INSERT INTO `worck` VALUES ('1', '477', '31600', '108399', '2', '2', '10', '50', '313', '407', '807', '807', '806', '407', '313', '3910', '2015-01-15 23:20:32');
+INSERT INTO `worck` VALUES ('4', '478', '31601', '108541', '1', '1', '10', '50', '50', '50', '50', '50', '50', '50', '50', '400', '2015-03-04 21:29:54');
