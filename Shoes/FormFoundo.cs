@@ -4,18 +4,19 @@
     using System;
     using System.Data;
     using System.Windows.Forms;
+
     public partial class FormFoundo : Form
     {
-        public FormFoundo()
-        {
-            InitializeComponent();
-        }
-
         //Read connection string from application settings = App.config.xml
         private string ConnectionString = Connection.MyConnectionString;
         private MySqlConnection connection;
         private MySqlDataAdapter adapterFoundo;
         private DataTable DTFoundo;
+
+        public FormFoundo()
+        {
+            InitializeComponent();
+        }
 
         private DataTable GetAllItems()
         {
@@ -64,6 +65,7 @@
             this.dataGridViewFon.DataSource = this.DTFoundo;
             
         }
+
         private void cmb_Foundo_Exit_Click(object sender, EventArgs e)
         {
             base.Close();
@@ -109,6 +111,7 @@
         {
             base.Close();
         }
+
         public int ReturnValueFon 
         { 
             get 

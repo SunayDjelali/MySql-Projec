@@ -80,6 +80,7 @@
             this.dataGridView.Size = new System.Drawing.Size(1267, 611);
             this.dataGridView.TabIndex = 10;
             this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
+            this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
             // 
             // FormLave
             // 

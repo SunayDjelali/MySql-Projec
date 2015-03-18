@@ -6,7 +6,6 @@
     using System.Windows.Forms;
     public partial class FormBu : Form
     {
-        
         public FormBu()
         {
             InitializeComponent();
@@ -80,6 +79,7 @@
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void cmb_Delete_Bu_Click(object sender, EventArgs e)
         {
             if (this.dataGridViewBu.SelectedRows.Count > 0)
@@ -103,10 +103,12 @@
         {
             base.Close();
         }
+
         private void dataGridViewBu_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             base.Close();
         }
+
         public int ReturnValueBu 
         { 
             get 

@@ -6,15 +6,16 @@
     using System.Windows.Forms;
     public partial class FormLavor : Form
     {
-        public FormLavor()
-        {
-            InitializeComponent();
-        }
         //Read connection string from application settings 
         private string ConnectionString = Connection.MyConnectionString;
         private MySqlConnection connection;
         private MySqlDataAdapter adapterLavoratione;
         private DataTable DTLavoratione;
+
+        public FormLavor()
+        {
+            InitializeComponent();
+        }
 
         private DataTable GetAllItems()
         {
@@ -50,7 +51,6 @@
             }
             return null;
         }
-
 
         private void FormLavor_Load(object sender, EventArgs e)
         {
@@ -98,6 +98,7 @@
             }
 
         }
+
         private void cmb_Lavor_Exit_Click(object sender, EventArgs e)
         {
             base.Close();
@@ -107,14 +108,15 @@
         {
             base.Close();
         }
-        public int ReturnValueLav 
-        { 
-            get 
+
+        public int ReturnValueLav
+        {
+            get
             {
                 int result;
                 try
                 {
-                    result = int.Parse(this.dataGridViewLav.SelectedCells[0].Value.ToString()); 
+                    result = int.Parse(this.dataGridViewLav.SelectedCells[0].Value.ToString());
                 }
                 catch (FormatException ex)
                 {

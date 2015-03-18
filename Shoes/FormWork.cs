@@ -98,11 +98,6 @@
             InitializeComponent();
         }
 
-        private void cmb_Exit_Click(object sender, EventArgs e)
-        {
-            base.Close();
-        }
-
         private void FormWork_Load(object sender, EventArgs e)
         {
             try
@@ -123,6 +118,11 @@
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void cmb_Exit_Click(object sender, EventArgs e)
+        {
+            base.Close();
         }
 
         private void cmb_Delete_Click(object sender, EventArgs e)
@@ -161,7 +161,6 @@
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -203,36 +202,41 @@
                     FLin.ShowDialog();
                     dataGridView.SelectedCells[0].Value = FLin.ReturnValueLin;
                 }
-            try
+        }
+
+        private void dataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 7 && e.ColumnIndex <= 14)
             {
-                int SelectedRowIndex = e.RowIndex;
-                //Save records in database using DTItems which is datasource for Grid
-                Int32 curentSum;
-                Int32 newSum;
-                //Calculate Values columns by rows in total column
-                if (dataGridView.Rows[SelectedRowIndex].Cells["Total"].Value == DBNull.Value)
+                try
                 {
-                    dataGridView.Rows[SelectedRowIndex].Cells["Total"].Value = 0;
+                    int SelectedRowIndex = e.RowIndex;
+                    //Save records in database using DTItems which is datasource for Grid
+                    //Calculate Values columns by rows in total column
+                    if (this.dataGridView.Rows[SelectedRowIndex].Cells["Total"].Value == DBNull.Value)
+                    {
+                        this.dataGridView.Rows[SelectedRowIndex].Cells["Total"].Value = 0;
+                    }
+                    //sum values on the datagrid celss in row at columns 7 to 14
+                    int newSum = Int32.Parse(this.dataGridView.Rows[SelectedRowIndex].Cells["No_39"].Value.ToString())
+                                + Int32.Parse(this.dataGridView.Rows[SelectedRowIndex].Cells["No_40"].Value.ToString())
+                                + Int32.Parse(this.dataGridView.Rows[SelectedRowIndex].Cells["No_41"].Value.ToString())
+                                + Int32.Parse(this.dataGridView.Rows[SelectedRowIndex].Cells["No_42"].Value.ToString())
+                                + Int32.Parse(this.dataGridView.Rows[SelectedRowIndex].Cells["No_43"].Value.ToString())
+                                + Int32.Parse(this.dataGridView.Rows[SelectedRowIndex].Cells["No_44"].Value.ToString())
+                                + Int32.Parse(this.dataGridView.Rows[SelectedRowIndex].Cells["No_45"].Value.ToString())
+                                + Int32.Parse(this.dataGridView.Rows[SelectedRowIndex].Cells["No_46"].Value.ToString());
+                    int curentSum = Int32.Parse(this.dataGridView.Rows[SelectedRowIndex].Cells["Total"].Value.ToString());
+                    if (newSum != curentSum)
+                    {
+                        this.dataGridView.Rows[SelectedRowIndex].Cells["Total"].Value = newSum;
+                    }
                 }
-                //7 do 14
-                newSum = Int32.Parse(dataGridView.Rows[SelectedRowIndex].Cells["No_39"].Value.ToString())
-                       + Int32.Parse(dataGridView.Rows[SelectedRowIndex].Cells["No_40"].Value.ToString())
-                       + Int32.Parse(dataGridView.Rows[SelectedRowIndex].Cells["No_41"].Value.ToString())
-                       + Int32.Parse(dataGridView.Rows[SelectedRowIndex].Cells["No_42"].Value.ToString())
-                       + Int32.Parse(dataGridView.Rows[SelectedRowIndex].Cells["No_43"].Value.ToString())
-                       + Int32.Parse(dataGridView.Rows[SelectedRowIndex].Cells["No_44"].Value.ToString())
-                       + Int32.Parse(dataGridView.Rows[SelectedRowIndex].Cells["No_45"].Value.ToString())
-                       + Int32.Parse(dataGridView.Rows[SelectedRowIndex].Cells["No_46"].Value.ToString());
-                curentSum = Int32.Parse(dataGridView.Rows[SelectedRowIndex].Cells["Total"].Value.ToString());
-                if (newSum != curentSum)
+                catch (Exception ex)
                 {
-                    dataGridView.Rows[SelectedRowIndex].Cells["Total"].Value = newSum;
+                    MessageBox.Show(string.Concat(ex));
+                    //throw;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("" + ex);
-                //throw;
             }
 
         }

@@ -6,16 +6,16 @@
     using System.Windows.Forms;
     public partial class FormLinia : Form
     {
-        public FormLinia()
-        {
-            InitializeComponent();
-        }
-
         //Read connection string from application settings = App.config.xml
         private string ConnectionString = Connection.MyConnectionString;
         private MySqlConnection connection;
         private MySqlDataAdapter adapterLinia;
         private DataTable DTLinia;
+
+        public FormLinia()
+        {
+            InitializeComponent();
+        }
 
         private DataTable GetAllItems()
         {
@@ -85,7 +85,6 @@
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         private void cmb_Delete_Lin_Click(object sender, EventArgs e)
@@ -111,9 +110,10 @@
         {
             base.Close();
         }
-        public int ReturnValueLin 
-        { 
-            get 
+
+        public int ReturnValueLin
+        {
+            get
             {
                 int result;
                 try

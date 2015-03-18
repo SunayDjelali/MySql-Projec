@@ -6,18 +6,49 @@
     using System.Data;
     using System.Drawing;
     using System.Windows.Forms;
+
     public partial class FormCheck : Form
     {
-        public FormCheck()
-        {
-            this.InitializeComponent();
-        }
         private string ConnectionString = Connection.MyConnectionString;
         private MySqlConnection connection;
         private MySqlDataAdapter adapterManufactured;
         private MySqlDataAdapter adapterLave;
         private DataTable DataTableManufactured;
         private DataTable DataTableLave;
+
+        public FormCheck()
+        {
+            this.InitializeComponent();
+        }
+
+        private void FormCheck_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                //Initialize mysql connection
+                connection = new MySqlConnection(ConnectionString);
+                //Get all items in datatable
+                DataTableManufactured = GetAllItemsManufactoring();
+                //DataTableLave.Clear();
+                Connection.TableLeave = "SELECT * FROM `leave`";
+                DataTableLave = GetAllItemsLave();
+                //Fill grid with items
+                dataGridViewDown.DataSource = DataTableManufactured;
+                dataGridViewDown.Columns["ID"].Visible = false;
+                dataGridViewDown.Columns["Updated_Dt"].Visible = false;
+                dataGridViewUp.DataSource = DataTableLave;
+                dataGridViewUp.Columns["ID"].Visible = true;
+                dataGridViewUp.Columns["Updated_Dt"].Visible = false;
+                dataGridViewDown.AllowUserToAddRows = true;
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public void SetZeroVlaue()
         {
             int lastRecortIndex = dataGridViewDown.NewRowIndex;
@@ -251,34 +282,6 @@
                 MessageBox.Show("You must select entire row in order to delete it.");
             }
 
-        }
-
-        private void FormCheck_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                //Initialize mysql connection
-                connection = new MySqlConnection(ConnectionString);
-                //Get all items in datatable
-                DataTableManufactured = GetAllItemsManufactoring();
-                //DataTableLave.Clear();
-                Connection.TableLeave = "SELECT * FROM `leave`";
-                DataTableLave = GetAllItemsLave();
-                //Fill grid with items
-                dataGridViewDown.DataSource = DataTableManufactured;
-                dataGridViewDown.Columns["ID"].Visible = false;
-                dataGridViewDown.Columns["Updated_Dt"].Visible = false;
-                dataGridViewUp.DataSource = DataTableLave;
-                dataGridViewUp.Columns["ID"].Visible = true;
-                dataGridViewUp.Columns["Updated_Dt"].Visible = false;
-                dataGridViewDown.AllowUserToAddRows = true;
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void txt_Lavor_TextChanged(object sender, EventArgs e)

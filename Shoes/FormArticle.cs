@@ -108,7 +108,8 @@
         {
             base.Close();
         }
-        public int ReturnValueArt 
+
+        public int ReturnValueArt
         {
             get
             {
@@ -122,12 +123,12 @@
                     MessageBox.Show("Must be select First Column\n" + ex.Message);
                     result = 0;
                 }
-                catch (NullReferenceException) 
+                catch (NullReferenceException)
                 {
                     result = 0;
                 }
                 return result;
-            } 
+            }
         }
     }
 }

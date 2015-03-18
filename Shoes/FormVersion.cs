@@ -6,15 +6,16 @@
     using System.Windows.Forms;
     public partial class FormVersion : Form
     {
-        public FormVersion()
-        {
-            InitializeComponent();
-        }
         //Read connection string from application settings = App.config.xml
         private string ConnectionString = Connection.MyConnectionString;
         private MySqlConnection connection;
         private MySqlDataAdapter adapterVersion;
         private DataTable DTVersion;
+
+        public FormVersion()
+        {
+            InitializeComponent();
+        }
 
         private DataTable GetAllItems()
         {
@@ -119,7 +120,7 @@
             base.Close();
         }
 
-        public int ReturnValueVer 
+        public int ReturnValueVer
         {
             get
             {
