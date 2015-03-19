@@ -45,7 +45,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(string.Concat(ex));
             }
         }
 
@@ -126,11 +126,12 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(string.Concat(ex));
             }
             return null;
 
         }
+
         public DataTable GetAllItemsLave()
         {
             try
@@ -196,7 +197,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(string.Concat(ex));
             }
             return null;
         }
@@ -218,15 +219,15 @@
                 for (int i = 7; i < 16; i++)
                 {
                     int upValueForMinuend = Int32.Parse(this.dataGridViewUp.Rows[0].Cells[i].Value.ToString());
-                    int downValueSubtrahend = Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[i].Value.ToString()); 
-                    int resultValue = upValueForMinuend-downValueSubtrahend;
+                    int downValueSubtrahend = Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[i].Value.ToString());
+                    int resultValue = upValueForMinuend - downValueSubtrahend;
                     this.dataGridViewUp.Rows[0].Cells[i].Value = resultValue;
-                    
+
                 }
 
                 //begin Update
                 string query = "UPDATE `leave` SET ID='" + this.dataGridViewUp.Rows[0].Cells["ID"].Value +
-                    "', Bu_ID='" + this.dataGridViewUp.Rows[0].Cells["Bu_ID"].Value + 
+                    "', Bu_ID='" + this.dataGridViewUp.Rows[0].Cells["Bu_ID"].Value +
                     "', Article_ID='" + this.dataGridViewUp.Rows[0].Cells["Article_ID"].Value +
                     "', Lavoratione_ID='" + this.dataGridViewUp.Rows[0].Cells["Lavoratione_ID"].Value +
                     "', Versions_ID='" + this.dataGridViewUp.Rows[0].Cells["Versions_ID"].Value +
@@ -239,7 +240,7 @@
                     "', No_43='" + this.dataGridViewUp.Rows[0].Cells["No_43"].Value +
                     "', No_44='" + this.dataGridViewUp.Rows[0].Cells["No_44"].Value +
                     "', No_45='" + this.dataGridViewUp.Rows[0].Cells["No_45"].Value +
-                    "', No_46='" + this.dataGridViewUp.Rows[0].Cells["No_46"].Value + 
+                    "', No_46='" + this.dataGridViewUp.Rows[0].Cells["No_46"].Value +
                     "', Total='" + this.dataGridViewUp.Rows[0].Cells["Total"].Value +
                     "', Updated_Dt=NOW() WHERE ID='" + this.dataGridViewUp.Rows[0].Cells["ID"].Value + "';";
                 MySqlConnection myConn = new MySqlConnection(Connection.MyConnectionString);
@@ -258,7 +259,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(string.Concat(ex));
             }
         }
 
@@ -290,15 +291,17 @@
             {
                 try
                 {
-                    //DataRow newRow = DataTableManufactured.NewRow();
-                    //DataTableManufactured.Rows.Add(newRow);
                     int newRecord = this.dataGridViewDown.NewRowIndex;
                     this.dataGridViewDown.AllowUserToAddRows = true;
                     DataGridViewRow R = dataGridViewDown.Rows[newRecord];
                     DataGridViewCell cell = R.Cells[1];
                     this.dataGridViewDown.CurrentCell = cell;
                     this.dataGridViewDown.BeginEdit(true);
-                    
+                    this.dataGridViewDown.BeginEdit(false);
+                    DataGridViewCell cell2 = R.Cells[7];
+                    this.dataGridViewDown.CurrentCell = cell2;
+                    this.dataGridViewDown.BeginEdit(true);
+
                     for (int numbers = 7; numbers < 15; numbers++)
                     {
                         this.dataGridViewDown.Rows[newRecord].Cells[numbers].Value = 0;
@@ -327,97 +330,61 @@
                     liniavalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value.ToString());
                     this.dataGridViewDown.Rows[newRecord].Cells["Linia_ID"].Value = liniavalaue;
 
-                    //this.dataGridViewDown.Rows[newRecord].Selected = true;
                     this.dataGridViewDown.Rows[newRecord].Cells[7].Selected = true;
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(string.Concat(ex));
                 }
             }
         }
 
         private void dataGridViewDown_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            //SetZeroVlaue();
+            SetZeroVlaue();
             if (e.ColumnIndex == 1)
             {
                 FormDate FDate = new FormDate();
                 FDate.ShowDialog();
                 this.dataGridViewDown.SelectedCells[0].Value = FDate.ReturnValueDate;
             }
+
         }
 
         private void dataGridViewDown_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            if (e.ColumnIndex >= 7 && e.ColumnIndex <= 14)
             {
-                FormLavor FLav = new FormLavor();
-                FLav.ShowDialog();
-                this.dataGridViewDown.SelectedCells[0].Value = FLav.ReturnValueLav;
-
                 try
                 {
-                    int newRecord = dataGridViewDown.NewRowIndex;
-                    SetZeroVlaue();
-                    Connection.TableLeave = "SELECT * FROM `leave` WHERE Lavoratione_ID=" + this.dataGridViewDown.Rows[newRecord].Cells["Lavoratione_ID"].Value.ToString();
-                    //Refresh grid
-                    DataTableLave.Clear();
-                    DataTableLave = GetAllItemsLave();
-                    this.dataGridViewUp.DataSource = DataTableLave;
-
-                    uint buvalaue;
-                    buvalaue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Bu_ID"].Value.ToString());
-                    this.dataGridViewDown.Rows[newRecord].Cells["Bu_ID"].Value = buvalaue;
-
-                    uint articlevalaue;
-                    articlevalaue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Article_ID"].Value.ToString());
-                    this.dataGridViewDown.Rows[newRecord].Cells["Article_ID"].Value = articlevalaue;
-
-                    byte foundovalaue;
-                    foundovalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Foundo_ID"].Value.ToString());
-                    this.dataGridViewDown.Rows[newRecord].Cells["Foundo_ID"].Value = foundovalaue;
-
-                    byte liniavalaue;
-                    liniavalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value.ToString());
-                    this.dataGridViewDown.Rows[newRecord].Cells["Linia_ID"].Value = liniavalaue;
-
+                    int SelectedRowIndex = e.RowIndex;
+                    //Save records in database using DTItems which is datasource for Grid
+                    //Calculate Values columns by rows in total column
+                    if (this.dataGridViewDown.Rows[SelectedRowIndex].Cells["Total"].Value == DBNull.Value)
+                    {
+                        this.dataGridViewDown.Rows[SelectedRowIndex].Cells["Total"].Value = 0;
+                    }
+                    //7 do 14
+                    int newSum = Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_39"].Value.ToString())
+                           + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_40"].Value.ToString())
+                           + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_41"].Value.ToString())
+                           + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_42"].Value.ToString())
+                           + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_43"].Value.ToString())
+                           + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_44"].Value.ToString())
+                           + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_45"].Value.ToString())
+                           + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_46"].Value.ToString());
+                    int curentSum = Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["Total"].Value.ToString());
+                    if (newSum != curentSum)
+                    {
+                        this.dataGridViewDown.Rows[SelectedRowIndex].Cells["Total"].Value = newSum;
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(string.Concat(ex));
                 }
             }
-            try
-            {
-                int SelectedRowIndex = e.RowIndex;
-                //Save records in database using DTItems which is datasource for Grid
-                //Calculate Values columns by rows in total column
-                if (this.dataGridViewDown.Rows[SelectedRowIndex].Cells["Total"].Value == DBNull.Value)
-                {
-                    this.dataGridViewDown.Rows[SelectedRowIndex].Cells["Total"].Value = 0;
-                }
-                //7 do 14
-                int newSum = Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_39"].Value.ToString())
-                       + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_40"].Value.ToString())
-                       + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_41"].Value.ToString())
-                       + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_42"].Value.ToString())
-                       + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_43"].Value.ToString())
-                       + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_44"].Value.ToString())
-                       + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_45"].Value.ToString())
-                       + Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["No_46"].Value.ToString());
-                int curentSum = Int32.Parse(dataGridViewDown.Rows[SelectedRowIndex].Cells["Total"].Value.ToString());
-                if (newSum != curentSum)
-                {
-                    this.dataGridViewDown.Rows[SelectedRowIndex].Cells["Total"].Value = newSum;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(string.Concat(ex));
-            }
-
         }
     }
 }

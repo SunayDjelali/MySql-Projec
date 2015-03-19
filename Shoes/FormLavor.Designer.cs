@@ -90,7 +90,9 @@
             this.Controls.Add(this.cmb_Delete_Lav);
             this.Controls.Add(this.cmb_Save_Lav);
             this.Controls.Add(this.dataGridViewLav);
+            this.Location = new System.Drawing.Point(0, 100);
             this.Name = "FormLavor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormLavor";
             this.Load += new System.EventHandler(this.FormLavor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLav)).EndInit();

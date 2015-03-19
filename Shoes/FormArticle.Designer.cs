@@ -90,7 +90,9 @@
             this.Controls.Add(this.cmb_Delete_Art);
             this.Controls.Add(this.cmb_Save_Art);
             this.Controls.Add(this.dataGridViewArt);
+            this.Location = new System.Drawing.Point(0, 100);
             this.Name = "FormArticle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormArticle";
             this.Load += new System.EventHandler(this.FormArticle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewArt)).EndInit();

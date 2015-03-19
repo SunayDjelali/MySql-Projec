@@ -90,7 +90,9 @@
             this.Controls.Add(this.cmb_Delete_Ver);
             this.Controls.Add(this.cmb_Save_Ver);
             this.Controls.Add(this.dataGridViewVer);
+            this.Location = new System.Drawing.Point(0, 100);
             this.Name = "FormVersion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormVersion";
             this.Load += new System.EventHandler(this.FormVersion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVer)).EndInit();

@@ -90,7 +90,9 @@
             this.Controls.Add(this.cmb_Delete_Lin);
             this.Controls.Add(this.cmb_Save_Lin);
             this.Controls.Add(this.dataGridViewLin);
+            this.Location = new System.Drawing.Point(0, 100);
             this.Name = "FormLinia";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormLinia";
             this.Load += new System.EventHandler(this.FormLinia_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLin)).EndInit();

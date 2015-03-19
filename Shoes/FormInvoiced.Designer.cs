@@ -38,7 +38,7 @@
             // cmb_Save
             // 
             this.cmb_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmb_Save.Location = new System.Drawing.Point(12, 618);
+            this.cmb_Save.Location = new System.Drawing.Point(12, 418);
             this.cmb_Save.Name = "cmb_Save";
             this.cmb_Save.Size = new System.Drawing.Size(75, 23);
             this.cmb_Save.TabIndex = 6;
@@ -48,7 +48,7 @@
             // cmb_Delete
             // 
             this.cmb_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_Delete.Location = new System.Drawing.Point(1069, 618);
+            this.cmb_Delete.Location = new System.Drawing.Point(813, 418);
             this.cmb_Delete.Name = "cmb_Delete";
             this.cmb_Delete.Size = new System.Drawing.Size(82, 23);
             this.cmb_Delete.TabIndex = 5;
@@ -58,7 +58,7 @@
             // cmb_Exit
             // 
             this.cmb_Exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_Exit.Location = new System.Drawing.Point(1157, 618);
+            this.cmb_Exit.Location = new System.Drawing.Point(901, 418);
             this.cmb_Exit.Name = "cmb_Exit";
             this.cmb_Exit.Size = new System.Drawing.Size(75, 23);
             this.cmb_Exit.TabIndex = 4;
@@ -75,14 +75,14 @@
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(3, 3);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(1267, 611);
+            this.dataGridView.Size = new System.Drawing.Size(1011, 411);
             this.dataGridView.TabIndex = 7;
             // 
             // FormInvoiced
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1272, 653);
+            this.ClientSize = new System.Drawing.Size(1016, 453);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.cmb_Save);
             this.Controls.Add(this.cmb_Delete);

@@ -50,7 +50,7 @@
             this.dataGridViewUp.Location = new System.Drawing.Point(5, 0);
             this.dataGridViewUp.Name = "dataGridViewUp";
             this.dataGridViewUp.ReadOnly = true;
-            this.dataGridViewUp.Size = new System.Drawing.Size(1267, 244);
+            this.dataGridViewUp.Size = new System.Drawing.Size(1007, 130);
             this.dataGridViewUp.TabIndex = 1;
             // 
             // dataGridViewDown
@@ -59,9 +59,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewDown.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewDown.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDown.Location = new System.Drawing.Point(5, 282);
+            this.dataGridViewDown.Location = new System.Drawing.Point(5, 149);
             this.dataGridViewDown.Name = "dataGridViewDown";
-            this.dataGridViewDown.Size = new System.Drawing.Size(1267, 244);
+            this.dataGridViewDown.Size = new System.Drawing.Size(1007, 244);
             this.dataGridViewDown.TabIndex = 2;
             this.dataGridViewDown.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewDown_CellBeginEdit);
             this.dataGridViewDown.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewDown_CellEndEdit);
@@ -69,7 +69,7 @@
             // cmb_Save
             // 
             this.cmb_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmb_Save.Location = new System.Drawing.Point(5, 575);
+            this.cmb_Save.Location = new System.Drawing.Point(5, 415);
             this.cmb_Save.Name = "cmb_Save";
             this.cmb_Save.Size = new System.Drawing.Size(75, 23);
             this.cmb_Save.TabIndex = 13;
@@ -80,7 +80,7 @@
             // cmb_Delete
             // 
             this.cmb_Delete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_Delete.Location = new System.Drawing.Point(1062, 575);
+            this.cmb_Delete.Location = new System.Drawing.Point(797, 415);
             this.cmb_Delete.Name = "cmb_Delete";
             this.cmb_Delete.Size = new System.Drawing.Size(82, 23);
             this.cmb_Delete.TabIndex = 14;
@@ -91,7 +91,7 @@
             // cmb_Exit
             // 
             this.cmb_Exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_Exit.Location = new System.Drawing.Point(1150, 575);
+            this.cmb_Exit.Location = new System.Drawing.Point(885, 416);
             this.cmb_Exit.Name = "cmb_Exit";
             this.cmb_Exit.Size = new System.Drawing.Size(75, 23);
             this.cmb_Exit.TabIndex = 15;
@@ -101,7 +101,7 @@
             // 
             // txt_Lavor
             // 
-            this.txt_Lavor.Location = new System.Drawing.Point(328, 560);
+            this.txt_Lavor.Location = new System.Drawing.Point(328, 426);
             this.txt_Lavor.Name = "txt_Lavor";
             this.txt_Lavor.Size = new System.Drawing.Size(53, 20);
             this.txt_Lavor.TabIndex = 3;
@@ -111,7 +111,7 @@
             // lbl_Lavoration
             // 
             this.lbl_Lavoration.AutoSize = true;
-            this.lbl_Lavoration.Location = new System.Drawing.Point(325, 539);
+            this.lbl_Lavoration.Location = new System.Drawing.Point(325, 405);
             this.lbl_Lavoration.Name = "lbl_Lavoration";
             this.lbl_Lavoration.Size = new System.Drawing.Size(57, 13);
             this.lbl_Lavoration.TabIndex = 10;
@@ -121,7 +121,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1276, 610);
+            this.ClientSize = new System.Drawing.Size(1016, 453);
             this.Controls.Add(this.lbl_Lavoration);
             this.Controls.Add(this.txt_Lavor);
             this.Controls.Add(this.cmb_Save);
