@@ -52,6 +52,13 @@
             return null;
         }
 
+        public void GoLastCell()
+        {
+            int lastRow = dataGridViewArt.RowCount - 1;
+            this.dataGridViewArt.CurrentCell = dataGridViewArt.Rows[lastRow].Cells[0];
+
+        }
+
         private void cmb_Article_Exit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -65,7 +72,9 @@
             this.DTArticle = this.GetAllItems();
             //Fill grid with items
             this.dataGridViewArt.DataSource = this.DTArticle;
-            //dataGridViewArt.ClearSelection(); 
+            dataGridViewArt.Columns["Updated_Dt"].ReadOnly = true;
+            GoLastCell();
+            lbl_Msg.Text = "";
         }
 
         private void cmb_Save_Art_Click(object sender, EventArgs e)
@@ -77,7 +86,8 @@
                 //Refresh grid
                 this.DTArticle = this.GetAllItems();
                 this.dataGridViewArt.DataSource = this.DTArticle;
-                MessageBox.Show("Items saved successfully...");
+                GoLastCell();
+                lbl_Msg.Text = "Items saved successfully...";
             }
             catch (Exception ex)
             {
@@ -96,7 +106,8 @@
                 //Refresh grid. Get items Bu again from database and show it in grid.
                 this.DTArticle = this.GetAllItems();
                 this.dataGridViewArt.DataSource = this.DTArticle;
-                MessageBox.Show("Selected item deleted successfully...");
+                GoLastCell();
+                lbl_Msg.Text = "Selected item deleted successfully...";
             }
             else
             {

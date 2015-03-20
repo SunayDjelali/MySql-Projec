@@ -63,6 +63,7 @@
             this.DTLinia = this.GetAllItems();
             //Fill grid with items
             this.dataGridViewLin.DataSource = this.DTLinia;
+            this.dataGridViewLin.Columns["Updated_Dt"].ReadOnly = true;
         }
 
         private void cmb_Linia_Exit_Click(object sender, EventArgs e)

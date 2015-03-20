@@ -32,6 +32,7 @@
             this.cmb_Save_Lav = new System.Windows.Forms.Button();
             this.dataGridViewLav = new System.Windows.Forms.DataGridView();
             this.cmb_Lavor_Exit = new System.Windows.Forms.Button();
+            this.lbl_Msg = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLav)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,11 +82,21 @@
             this.cmb_Lavor_Exit.UseVisualStyleBackColor = true;
             this.cmb_Lavor_Exit.Click += new System.EventHandler(this.cmb_Lavor_Exit_Click);
             // 
+            // lbl_Msg
+            // 
+            this.lbl_Msg.AutoSize = true;
+            this.lbl_Msg.Location = new System.Drawing.Point(159, 367);
+            this.lbl_Msg.Name = "lbl_Msg";
+            this.lbl_Msg.Size = new System.Drawing.Size(50, 13);
+            this.lbl_Msg.TabIndex = 17;
+            this.lbl_Msg.Text = "Message";
+            // 
             // FormLavor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(377, 373);
+            this.ClientSize = new System.Drawing.Size(377, 389);
+            this.Controls.Add(this.lbl_Msg);
             this.Controls.Add(this.cmb_Lavor_Exit);
             this.Controls.Add(this.cmb_Delete_Lav);
             this.Controls.Add(this.cmb_Save_Lav);
@@ -97,6 +108,7 @@
             this.Load += new System.EventHandler(this.FormLavor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLav)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -106,5 +118,6 @@
         private System.Windows.Forms.Button cmb_Save_Lav;
         private System.Windows.Forms.DataGridView dataGridViewLav;
         private System.Windows.Forms.Button cmb_Lavor_Exit;
+        private System.Windows.Forms.Label lbl_Msg;
     }
 }

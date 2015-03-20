@@ -13,6 +13,12 @@
         private MySqlDataAdapter adapterFoundo;
         private DataTable DTFoundo;
 
+        public void GoLastRow()
+        {
+            int lastRow = this.dataGridViewFon.RowCount - 1;
+            this.dataGridViewFon.CurrentCell = this.dataGridViewFon.Rows[lastRow].Cells[0];
+
+        }
         public FormFoundo()
         {
             InitializeComponent();
@@ -63,7 +69,10 @@
             this.DTFoundo = this.GetAllItems();
             //Fill grid with items
             this.dataGridViewFon.DataSource = this.DTFoundo;
-            
+            dataGridViewFon.Columns["Updated_Dt"].ReadOnly = true;
+
+            GoLastRow();
+            lbl_Msg.Text = "";
         }
 
         private void cmb_Foundo_Exit_Click(object sender, EventArgs e)
@@ -80,7 +89,8 @@
                 //Refresh grid
                 this.DTFoundo = this.GetAllItems();
                 this.dataGridViewFon.DataSource = this.DTFoundo;
-                MessageBox.Show("Items saved successfully...");
+                GoLastRow();
+                lbl_Msg.Text = "Items saved successfully...";
             }
             catch (Exception ex)
             {
@@ -99,7 +109,8 @@
                 //Refresh grid. Get items Bu again from database and show it in grid.
                 this.DTFoundo = this.GetAllItems();
                 this.dataGridViewFon.DataSource = this.DTFoundo;
-                MessageBox.Show("Selected item deleted successfully...");
+                GoLastRow();
+                lbl_Msg.Text = "Selected item deleted successfully...";
             }
             else
             {

@@ -44,10 +44,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(241, 170);
             this.Controls.Add(this.monthCalendar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Location = new System.Drawing.Point(50, 100);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormDate";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormDate";
             this.ResumeLayout(false);
 

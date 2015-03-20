@@ -11,7 +11,11 @@
         private MySqlConnection connection;
         private MySqlDataAdapter adapterVersion;
         private DataTable DTVersion;
-
+        public void GoLastRow()
+        {
+            int lastRow = this.dataGridViewVer.RowCount - 1;
+            this.dataGridViewVer.CurrentCell = dataGridViewVer.Rows[lastRow].Cells[0];
+        }
         public FormVersion()
         {
             InitializeComponent();
@@ -70,6 +74,10 @@
 
             //Fill grid with items
             this.dataGridViewVer.DataSource = this.DTVersion;
+            this.dataGridViewVer.Columns["Updated_Dt"].ReadOnly = true;
+
+            GoLastRow();
+            lbl_Msg.Text = "";
         }
 
         private void cmb_Save_Ver_Click(object sender, EventArgs e)
@@ -83,8 +91,8 @@
                 this.DTVersion = this.GetAllItems();
 
                 this.dataGridViewVer.DataSource = this.DTVersion;
-
-                MessageBox.Show("Items saved successfully...");
+                GoLastRow();
+                lbl_Msg.Text = "Items saved successfully...";
             }
             catch (Exception ex)
             {
@@ -106,8 +114,9 @@
                 this.DTVersion = this.GetAllItems();
 
                 this.dataGridViewVer.DataSource = this.DTVersion;
+                GoLastRow();
 
-                MessageBox.Show("Selected item deleted successfully...");
+                lbl_Msg.Text = "Selected item deleted successfully...";
             }
             else
             {

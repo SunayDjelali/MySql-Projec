@@ -12,6 +12,11 @@
         private MySqlDataAdapter adapterLavoratione;
         private DataTable DTLavoratione;
 
+        public void GoLastRow()
+        {
+            int lastRow = this.dataGridViewLav.RowCount - 1;
+            this.dataGridViewLav.CurrentCell = this.dataGridViewLav.Rows[lastRow].Cells[0];
+        }
         public FormLavor()
         {
             InitializeComponent();
@@ -60,6 +65,9 @@
             this.DTLavoratione = this.GetAllItems();
             //Fill grid with items from Lavoratione
             this.dataGridViewLav.DataSource = this.DTLavoratione;
+            this.dataGridViewLav.Columns["Updated_Dt"].ReadOnly = true;
+            GoLastRow();
+            lbl_Msg.Text = "";
         }
 
         private void cmb_Save_Lav_Click(object sender, EventArgs e)
@@ -71,7 +79,8 @@
                 //Refresh grid 
                 this.DTLavoratione = this.GetAllItems();
                 this.dataGridViewLav.DataSource = this.DTLavoratione;
-                MessageBox.Show("Items saved successfully...");
+                GoLastRow();
+                lbl_Msg.Text = "Items saved successfully...";
             }
             catch (Exception ex)
             {
@@ -90,7 +99,8 @@
                 //Refresh grid. Get items again from database and show it in grid.
                 this.DTLavoratione = this.GetAllItems();
                 this.dataGridViewLav.DataSource = this.DTLavoratione;
-                MessageBox.Show("Selected item deleted successfully...");
+                GoLastRow();
+                lbl_Msg.Text = "Selected item deleted successfully...";
             }
             else
             {

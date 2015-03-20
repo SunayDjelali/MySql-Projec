@@ -44,6 +44,7 @@
                 this.adapterBu.DeleteCommand.Parameters.Add("@ID", MySqlDbType.Int32, 11, "ID");
 
                 //return datatable with all records
+                lbl_Msg.Text = "";
                 return DSBu.Tables[0];
             }
             catch (Exception ex)
@@ -51,6 +52,11 @@
                 MessageBox.Show(ex.Message);
             }
             return null;
+        }
+        public void GoLastCell()
+        {
+            int lastRow = dataGridViewBu.RowCount - 1;
+            this.dataGridViewBu.CurrentCell = this.dataGridViewBu.Rows[lastRow].Cells[0];
         }
 
         private void FormBu_Load(object sender, EventArgs e)
@@ -61,6 +67,9 @@
             this.DTBu = this.GetAllItems();
             //Fill grid with items
             this.dataGridViewBu.DataSource = this.DTBu;
+            dataGridViewBu.Columns["Updated_Dt"].ReadOnly = true;
+
+            GoLastCell();
         }
 
         private void cmb_Save_Bu_Click(object sender, EventArgs e)
@@ -72,7 +81,9 @@
                 //Refresh grid
                 this.DTBu = this.GetAllItems();
                 this.dataGridViewBu.DataSource = this.DTBu;
-                MessageBox.Show("Items saved successfully...");
+                this.lbl_Msg.Text = "Items saved successfully...";
+                GoLastCell();
+
             }
             catch (Exception ex)
             {
@@ -91,7 +102,8 @@
                 //Refresh grid. Get items Bu again from database and show it in grid.
                 this.DTBu = this.GetAllItems();
                 this.dataGridViewBu.DataSource = this.DTBu;
-                MessageBox.Show("Selected item deleted successfully...");
+                this.lbl_Msg.Text = "Selected item deleted successfully...";
+                GoLastCell();
             }
             else
             {
@@ -130,6 +142,17 @@
                 }
                 return result;
             }
+        }
+
+        private void dataGridViewBu_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.ColumnIndex == 1)
+            {
+                FormDate FDate = new FormDate();
+                FDate.ShowDialog();
+                this.dataGridViewBu.SelectedCells[0].Value = FDate.ReturnValueDate;
+            }
+            lbl_Msg.Text = "";
         }  
     }
 }
