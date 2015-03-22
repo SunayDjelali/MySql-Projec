@@ -101,7 +101,7 @@
             this.Controls.Add(this.cmb_Delete_Lav);
             this.Controls.Add(this.cmb_Save_Lav);
             this.Controls.Add(this.dataGridViewLav);
-            this.Location = new System.Drawing.Point(0, 100);
+            this.Location = new System.Drawing.Point(250, 100);
             this.Name = "FormLavor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormLavor";

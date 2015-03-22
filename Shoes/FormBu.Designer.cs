@@ -102,7 +102,7 @@
             this.Controls.Add(this.cmb_Delete_Bu);
             this.Controls.Add(this.cmb_Save_Bu);
             this.Controls.Add(this.dataGridViewBu);
-            this.Location = new System.Drawing.Point(0, 100);
+            this.Location = new System.Drawing.Point(100, 100);
             this.Name = "FormBu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Bu";

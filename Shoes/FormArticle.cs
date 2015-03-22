@@ -141,5 +141,10 @@
                 return result;
             }
         }
+
+        private void dataGridViewArt_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            lbl_Msg.Text = "";
+        }
     }
 }

@@ -12,6 +12,12 @@
         private MySqlDataAdapter adapterWorck;
         private DataTable DataTableWork;
 
+        public void GoLastCell()
+        {
+            int lastRow = this.dataGridView.RowCount - 1;
+            this.dataGridView.CurrentCell = dataGridView.Rows[lastRow].Cells[1];
+        }
+
         private DataTable GetAllItems()
         {
             try
@@ -111,7 +117,7 @@
                 this.dataGridView.DataSource = this.DataTableWork;
                 this.dataGridView.Columns["ID"].Visible = false;
                 this.dataGridView.Columns["Updated_Dt"].Visible = false;
-                //DataTableManufactoring.Clear();
+                GoLastCell();
             }
             catch (Exception ex)
             {

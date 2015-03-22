@@ -75,7 +75,7 @@
             //Fill grid with items
             this.dataGridViewVer.DataSource = this.DTVersion;
             this.dataGridViewVer.Columns["Updated_Dt"].ReadOnly = true;
-
+            this.dataGridViewVer.Columns["ID"].ReadOnly = true;
             GoLastRow();
             lbl_Msg.Text = "";
         }

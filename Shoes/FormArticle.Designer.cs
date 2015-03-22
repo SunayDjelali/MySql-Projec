@@ -68,6 +68,7 @@
             this.dataGridViewArt.Name = "dataGridViewArt";
             this.dataGridViewArt.Size = new System.Drawing.Size(353, 314);
             this.dataGridViewArt.TabIndex = 13;
+            this.dataGridViewArt.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewArt_CellBeginEdit);
             this.dataGridViewArt.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewArt_CellMouseDoubleClick);
             // 
             // cmb_Article_Exit
@@ -101,7 +102,7 @@
             this.Controls.Add(this.cmb_Delete_Art);
             this.Controls.Add(this.cmb_Save_Art);
             this.Controls.Add(this.dataGridViewArt);
-            this.Location = new System.Drawing.Point(0, 100);
+            this.Location = new System.Drawing.Point(250, 100);
             this.Name = "FormArticle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormArticle";

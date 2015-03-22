@@ -101,7 +101,7 @@
             this.Controls.Add(this.cmb_Delete_Fou);
             this.Controls.Add(this.cmb_Save_Fou);
             this.Controls.Add(this.dataGridViewFon);
-            this.Location = new System.Drawing.Point(0, 100);
+            this.Location = new System.Drawing.Point(390, 100);
             this.Name = "FormFoundo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormFoundo";

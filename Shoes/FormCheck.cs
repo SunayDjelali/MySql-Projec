@@ -40,8 +40,6 @@
                 dataGridViewUp.Columns["ID"].Visible = true;
                 dataGridViewUp.Columns["Updated_Dt"].Visible = false;
                 dataGridViewDown.AllowUserToAddRows = true;
-
-
             }
             catch (Exception ex)
             {
@@ -54,11 +52,60 @@
             int lastRecortIndex = dataGridViewDown.NewRowIndex;
             if (this.dataGridViewDown.SelectedCells[0].Value == DBNull.Value)
             {
-                for (int numbers = 7; numbers < 15; numbers++)
+                for (int numbers = 7; numbers < 16; numbers++)
                 {
                     this.dataGridViewDown.Rows[lastRecortIndex].Cells[numbers].Value = 0;
                 }
             }
+        }
+
+        public void StringCalculation() 
+        {
+            //begin Update
+            string query = "UPDATE `leave` SET ID='" + this.dataGridViewUp.Rows[0].Cells["ID"].Value +
+                "', Bu_ID='" + this.dataGridViewUp.Rows[0].Cells["Bu_ID"].Value +
+                "', Article_ID='" + this.dataGridViewUp.Rows[0].Cells["Article_ID"].Value +
+                "', Lavoratione_ID='" + this.dataGridViewUp.Rows[0].Cells["Lavoratione_ID"].Value +
+                "', Versions_ID='" + this.dataGridViewUp.Rows[0].Cells["Versions_ID"].Value +
+                "', Foundo_ID='" + this.dataGridViewUp.Rows[0].Cells["Foundo_ID"].Value +
+                "', Linia_ID='" + this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value +
+                "', No_39='" + this.dataGridViewUp.Rows[0].Cells["No_39"].Value +
+                "', No_40='" + this.dataGridViewUp.Rows[0].Cells["No_40"].Value +
+                "', No_41='" + this.dataGridViewUp.Rows[0].Cells["No_41"].Value +
+                "', No_42='" + this.dataGridViewUp.Rows[0].Cells["No_42"].Value +
+                "', No_43='" + this.dataGridViewUp.Rows[0].Cells["No_43"].Value +
+                "', No_44='" + this.dataGridViewUp.Rows[0].Cells["No_44"].Value +
+                "', No_45='" + this.dataGridViewUp.Rows[0].Cells["No_45"].Value +
+                "', No_46='" + this.dataGridViewUp.Rows[0].Cells["No_46"].Value +
+                "', Total='" + this.dataGridViewUp.Rows[0].Cells["Total"].Value +
+                "', Updated_Dt=NOW() WHERE ID='" + this.dataGridViewUp.Rows[0].Cells["ID"].Value + "';";
+            MySqlConnection myConn = new MySqlConnection(Connection.MyConnectionString);
+            MySqlCommand cmdDataBase = new MySqlCommand(query, myConn);
+            MySqlDataReader myReader;
+            myConn.Open();
+            myReader = cmdDataBase.ExecuteReader();
+            MessageBox.Show("Items saved successfully...");
+            myConn.Close();
+            //Refresh grid
+            Connection.TableLeave = "SELECT * FROM `leave`";
+            DataTableLave = GetAllItemsLave();
+            this.dataGridViewUp.DataSource = this.DataTableLave;
+            this.txt_Lavor.Clear();
+
+        }
+
+        public void CalculationLavesTotal()
+        {
+            //7 do 14
+            int newSum = Int32.Parse(dataGridViewUp.Rows[0].Cells["No_39"].Value.ToString())
+                       + Int32.Parse(dataGridViewUp.Rows[0].Cells["No_40"].Value.ToString())
+                       + Int32.Parse(dataGridViewUp.Rows[0].Cells["No_41"].Value.ToString())
+                       + Int32.Parse(dataGridViewUp.Rows[0].Cells["No_42"].Value.ToString())
+                       + Int32.Parse(dataGridViewUp.Rows[0].Cells["No_43"].Value.ToString())
+                       + Int32.Parse(dataGridViewUp.Rows[0].Cells["No_44"].Value.ToString())
+                       + Int32.Parse(dataGridViewUp.Rows[0].Cells["No_45"].Value.ToString())
+                       + Int32.Parse(dataGridViewUp.Rows[0].Cells["No_46"].Value.ToString());
+            this.dataGridViewUp.Rows[0].Cells["Total"].Value = newSum;
         }
 
         public DataTable GetAllItemsManufactoring()
@@ -211,51 +258,11 @@
         {
             try
             {
-                int enteredValue = this.dataGridViewDown.NewRowIndex - 1;
-
                 this.adapterManufactured.Update(this.DataTableManufactured);
                 //Refresh grid
                 this.dataGridViewDown.DataSource = this.DataTableManufactured;
-                for (int i = 7; i < 16; i++)
-                {
-                    int upValueForMinuend = Int32.Parse(this.dataGridViewUp.Rows[0].Cells[i].Value.ToString());
-                    int downValueSubtrahend = Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[i].Value.ToString());
-                    int resultValue = upValueForMinuend - downValueSubtrahend;
-                    this.dataGridViewUp.Rows[0].Cells[i].Value = resultValue;
-
-                }
-
-                //begin Update
-                string query = "UPDATE `leave` SET ID='" + this.dataGridViewUp.Rows[0].Cells["ID"].Value +
-                    "', Bu_ID='" + this.dataGridViewUp.Rows[0].Cells["Bu_ID"].Value +
-                    "', Article_ID='" + this.dataGridViewUp.Rows[0].Cells["Article_ID"].Value +
-                    "', Lavoratione_ID='" + this.dataGridViewUp.Rows[0].Cells["Lavoratione_ID"].Value +
-                    "', Versions_ID='" + this.dataGridViewUp.Rows[0].Cells["Versions_ID"].Value +
-                    "', Foundo_ID='" + this.dataGridViewUp.Rows[0].Cells["Foundo_ID"].Value +
-                    "', Linia_ID='" + this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value +
-                    "', No_39='" + this.dataGridViewUp.Rows[0].Cells["No_39"].Value +
-                    "', No_40='" + this.dataGridViewUp.Rows[0].Cells["No_40"].Value +
-                    "', No_41='" + this.dataGridViewUp.Rows[0].Cells["No_41"].Value +
-                    "', No_42='" + this.dataGridViewUp.Rows[0].Cells["No_42"].Value +
-                    "', No_43='" + this.dataGridViewUp.Rows[0].Cells["No_43"].Value +
-                    "', No_44='" + this.dataGridViewUp.Rows[0].Cells["No_44"].Value +
-                    "', No_45='" + this.dataGridViewUp.Rows[0].Cells["No_45"].Value +
-                    "', No_46='" + this.dataGridViewUp.Rows[0].Cells["No_46"].Value +
-                    "', Total='" + this.dataGridViewUp.Rows[0].Cells["Total"].Value +
-                    "', Updated_Dt=NOW() WHERE ID='" + this.dataGridViewUp.Rows[0].Cells["ID"].Value + "';";
-                MySqlConnection myConn = new MySqlConnection(Connection.MyConnectionString);
-                MySqlCommand cmdDataBase = new MySqlCommand(query, myConn);
-                MySqlDataReader myReader;
-                myConn.Open();
-                myReader = cmdDataBase.ExecuteReader();
-                MessageBox.Show("Items saved successfully...");
-                myConn.Close();
-                //Refresh grid
-                Connection.TableLeave = "SELECT * FROM `leave`";
-                DataTableLave = GetAllItemsLave();
-                this.dataGridViewUp.DataSource = this.DataTableLave;
-                this.txt_Lavor.Clear();
-
+                //Calculation();
+                StringCalculation();
             }
             catch (Exception ex)
             {
@@ -298,14 +305,9 @@
                     this.dataGridViewDown.CurrentCell = cell;
                     this.dataGridViewDown.BeginEdit(true);
                     this.dataGridViewDown.BeginEdit(false);
-                    DataGridViewCell cell2 = R.Cells[7];
-                    this.dataGridViewDown.CurrentCell = cell2;
-                    this.dataGridViewDown.BeginEdit(true);
-
-                    for (int numbers = 7; numbers < 15; numbers++)
-                    {
-                        this.dataGridViewDown.Rows[newRecord].Cells[numbers].Value = 0;
-                    }
+                    //DataGridViewCell cell2 = R.Cells[7];
+                    //this.dataGridViewDown.CurrentCell = cell2;
+                    //this.dataGridViewDown.BeginEdit(true);
 
                     this.dataGridViewDown.Rows[newRecord].Cells["Lavoratione_ID"].Value = txt_Lavor.Text;
                     Connection.TableLeave = "SELECT * FROM `leave` WHERE Lavoratione_ID=" + txt_Lavor.Text;
@@ -331,7 +333,6 @@
                     this.dataGridViewDown.Rows[newRecord].Cells["Linia_ID"].Value = liniavalaue;
 
                     this.dataGridViewDown.Rows[newRecord].Cells[7].Selected = true;
-
                 }
                 catch (Exception ex)
                 {
@@ -349,11 +350,12 @@
                 FDate.ShowDialog();
                 this.dataGridViewDown.SelectedCells[0].Value = FDate.ReturnValueDate;
             }
-
         }
 
         private void dataGridViewDown_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            int enteredValue = this.dataGridViewDown.NewRowIndex - 1;
+            string mesageNegative = "Check Manufetured Production smething is a Wrong. Laves canot be Negative";
             if (e.ColumnIndex >= 7 && e.ColumnIndex <= 14)
             {
                 try
@@ -384,6 +386,24 @@
                 {
                     MessageBox.Show(string.Concat(ex));
                 }
+            }
+            if (e.ColumnIndex >= 7 && e.ColumnIndex <=14)
+            {
+                int upValueForMinuend = Int32.Parse(this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value.ToString());
+                int downValueSubtrahend = Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[e.ColumnIndex].Value.ToString());
+                int resultValue = upValueForMinuend - downValueSubtrahend;
+
+                if (resultValue < 0)
+                {
+                    MessageBox.Show(mesageNegative);
+                    this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = upValueForMinuend;
+                    this.dataGridViewDown.Rows[0].Cells[e.ColumnIndex].Value = 0;
+                }
+                else 
+                {
+                    this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = resultValue;
+                }
+                CalculationLavesTotal();
             }
         }
     }

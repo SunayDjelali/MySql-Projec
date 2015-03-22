@@ -11,6 +11,12 @@
         private MySqlConnection connection;
         private MySqlDataAdapter adapterManufactured;
         private DataTable DataTableManufactured;
+        public void GoLastCell()
+        {
+            int lastRow = this.dataGridView.RowCount - 1;
+            this.dataGridView.CurrentCell = dataGridView.Rows[lastRow].Cells[1];
+
+        }
 
         private DataTable GetAllItemsManufactoring()
         {
@@ -112,7 +118,7 @@
                 this.dataGridView.DataSource = this.DataTableManufactured;
                 this.dataGridView.Columns["ID"].Visible = false;
                 this.dataGridView.Columns["Updated_Dt"].Visible = false;
-                //DataTableManufactoring.Clear();
+                GoLastCell();
             }
             catch (Exception ex)
             {
