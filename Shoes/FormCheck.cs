@@ -292,55 +292,6 @@
 
         }
 
-        private void txt_Lavor_TextChanged(object sender, EventArgs e)
-        {
-            if (txt_Lavor.Text.Length >= 6 && txt_Lavor.Text != "")
-            {
-                try
-                {
-                    int newRecord = this.dataGridViewDown.NewRowIndex;
-                    this.dataGridViewDown.AllowUserToAddRows = true;
-                    DataGridViewRow R = dataGridViewDown.Rows[newRecord];
-                    DataGridViewCell cell = R.Cells[1];
-                    this.dataGridViewDown.CurrentCell = cell;
-                    this.dataGridViewDown.BeginEdit(true);
-                    this.dataGridViewDown.BeginEdit(false);
-                    //DataGridViewCell cell2 = R.Cells[7];
-                    //this.dataGridViewDown.CurrentCell = cell2;
-                    //this.dataGridViewDown.BeginEdit(true);
-
-                    this.dataGridViewDown.Rows[newRecord].Cells["Lavoratione_ID"].Value = txt_Lavor.Text;
-                    Connection.TableLeave = "SELECT * FROM `leave` WHERE Lavoratione_ID=" + txt_Lavor.Text;
-                    //Refresh grid
-                    DataTableLave.Clear();
-                    DataTableLave = GetAllItemsLave();
-                    this.dataGridViewUp.DataSource = DataTableLave;
-
-                    uint buvalaue;
-                    buvalaue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Bu_ID"].Value.ToString());
-                    this.dataGridViewDown.Rows[newRecord].Cells["Bu_ID"].Value = buvalaue;
-
-                    uint articlevalaue;
-                    articlevalaue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Article_ID"].Value.ToString());
-                    this.dataGridViewDown.Rows[newRecord].Cells["Article_ID"].Value = articlevalaue;
-
-                    byte foundovalaue;
-                    foundovalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Foundo_ID"].Value.ToString());
-                    this.dataGridViewDown.Rows[newRecord].Cells["Foundo_ID"].Value = foundovalaue;
-
-                    byte liniavalaue;
-                    liniavalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value.ToString());
-                    this.dataGridViewDown.Rows[newRecord].Cells["Linia_ID"].Value = liniavalaue;
-
-                    this.dataGridViewDown.Rows[newRecord].Cells[7].Selected = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(string.Concat(ex));
-                }
-            }
-        }
-
         private void dataGridViewDown_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             SetZeroVlaue();
@@ -389,22 +340,131 @@
             }
             if (e.ColumnIndex >= 7 && e.ColumnIndex <=14)
             {
-                int upValueForMinuend = Int32.Parse(this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value.ToString());
-                int downValueSubtrahend = Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[e.ColumnIndex].Value.ToString());
-                int resultValue = upValueForMinuend - downValueSubtrahend;
+                try
+                {
+                    int upValueForMinuend = Int32.Parse(this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value.ToString());
+                    int downValueSubtrahend = Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[e.ColumnIndex].Value.ToString());
+                    int resultValue = upValueForMinuend - downValueSubtrahend;
+                    //int[] ostatik = { Int32.Parse(this.dataGridViewUp.Rows[0].Cells[7].Value.ToString()),
+                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[8].Value.ToString()),
+                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[9].Value.ToString()),
+                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[10].Value.ToString()),
+                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[11].Value.ToString()),
+                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[12].Value.ToString()),
+                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[13].Value.ToString()),
+                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[14].Value.ToString()),
+                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[15].Value.ToString())};
 
-                if (resultValue < 0)
-                {
-                    MessageBox.Show(mesageNegative);
-                    this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = upValueForMinuend;
-                    this.dataGridViewDown.Rows[0].Cells[e.ColumnIndex].Value = 0;
+                    if (resultValue < 0)
+                    {
+                        MessageBox.Show(mesageNegative);
+                        this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = upValueForMinuend;
+                        this.dataGridViewDown.Rows[0].Cells[e.ColumnIndex].Value = 0;
+                    }
+                    else
+                    {
+                        this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = resultValue;
+                    }
+                    CalculationLavesTotal();
+
                 }
-                else 
+                catch (Exception ex)
                 {
-                    this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = resultValue;
+                    MessageBox.Show(string.Concat(ex));
                 }
-                CalculationLavesTotal();
             }
         }
+
+        private void cmb_Run_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTableManufactured.Clear();
+                DataTableManufactured = GetAllItemsManufactoring();
+                dataGridViewDown.DataSource = DataTableManufactured;
+
+                int newRecord = this.dataGridViewDown.NewRowIndex;
+                this.dataGridViewDown.AllowUserToAddRows = true;
+                DataGridViewRow R = dataGridViewDown.Rows[newRecord];
+                DataGridViewCell cell = R.Cells[1];
+                this.dataGridViewDown.CurrentCell = cell;
+                this.dataGridViewDown.BeginEdit(true);
+
+                Connection.TableLeave = "SELECT * FROM `leave` WHERE Lavoratione_ID=" + txt_Lavor.Text+ " AND Linia_ID=" + txt_Linia.Text;
+                //Refresh grid
+                DataTableLave.Clear();
+
+                DataTableLave = GetAllItemsLave();
+                this.dataGridViewUp.DataSource = DataTableLave;
+
+                uint buvalaue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Bu_ID"].Value.ToString());
+                this.dataGridViewDown.Rows[newRecord].Cells["Bu_ID"].Value = buvalaue;
+
+                uint articlevalaue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Article_ID"].Value.ToString());
+                this.dataGridViewDown.Rows[newRecord].Cells["Article_ID"].Value = articlevalaue;
+
+                uint lavevalue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Lavoratione_ID"].Value.ToString());
+                this.dataGridViewDown.Rows[newRecord].Cells["Lavoratione_ID"].Value = lavevalue;
+
+                byte foundovalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Foundo_ID"].Value.ToString());
+                this.dataGridViewDown.Rows[newRecord].Cells["Foundo_ID"].Value = foundovalaue;
+
+                byte liniavalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value.ToString());
+                this.dataGridViewDown.Rows[newRecord].Cells["Linia_ID"].Value = liniavalaue;
+
+                this.dataGridViewDown.Rows[newRecord].Cells[7].Selected = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Concat(ex));
+            }
+
+        }
+
+        private void txt_Lavor_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_Lavor.Text.Length >= 6 && txt_Lavor.Text != "")
+            {
+                try
+                {
+                    int newRecord = this.dataGridViewDown.NewRowIndex;
+                    this.dataGridViewDown.AllowUserToAddRows = true;
+                    DataGridViewRow R = dataGridViewDown.Rows[newRecord];
+                    DataGridViewCell cell = R.Cells[1];
+                    this.dataGridViewDown.CurrentCell = cell;
+                    this.dataGridViewDown.BeginEdit(true);
+
+                    Connection.TableLeave = "SELECT * FROM `leave` WHERE Lavoratione_ID=" + txt_Lavor.Text;
+
+                    //Refresh grid
+                    DataTableLave.Clear();
+                    DataTableLave = GetAllItemsLave();
+                    this.dataGridViewUp.DataSource = DataTableLave;
+
+                    uint buvalaue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Bu_ID"].Value.ToString());
+                    this.dataGridViewDown.Rows[newRecord].Cells["Bu_ID"].Value = buvalaue;
+
+                    uint articlevalaue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Article_ID"].Value.ToString());
+                    this.dataGridViewDown.Rows[newRecord].Cells["Article_ID"].Value = articlevalaue;
+
+                    uint lavevalue = Convert.ToUInt32(this.dataGridViewUp.Rows[0].Cells["Lavoratione_ID"].Value.ToString());
+                    this.dataGridViewDown.Rows[newRecord].Cells["Lavoratione_ID"].Value = lavevalue;
+
+                    byte foundovalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Foundo_ID"].Value.ToString());
+                    this.dataGridViewDown.Rows[newRecord].Cells["Foundo_ID"].Value = foundovalaue;
+
+                    byte liniavalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value.ToString());
+                    this.dataGridViewDown.Rows[newRecord].Cells["Linia_ID"].Value = liniavalaue;
+
+                    this.dataGridViewDown.Rows[newRecord].Cells[7].Selected = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Concat(ex));
+                }
+            }
+
+        }
+
     }
 }
