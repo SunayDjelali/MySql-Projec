@@ -289,7 +289,6 @@
             {
                 MessageBox.Show("You must select entire row in order to delete it.");
             }
-
         }
 
         private void dataGridViewDown_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -455,6 +454,11 @@
 
                     byte liniavalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value.ToString());
                     this.dataGridViewDown.Rows[newRecord].Cells["Linia_ID"].Value = liniavalaue;
+                    bool moreLiniaBuldRhisLavoratione = dataGridViewUp.RowCount > 1;
+                    if (moreLiniaBuldRhisLavoratione)
+                    {
+                        this.dataGridViewUp.Columns["Linia_ID"].DefaultCellStyle.BackColor = Color.Red;
+                    }
 
                     this.dataGridViewDown.Rows[newRecord].Cells[7].Selected = true;
                 }
@@ -463,8 +467,6 @@
                     MessageBox.Show(string.Concat(ex));
                 }
             }
-
         }
-
     }
 }
