@@ -15,7 +15,7 @@
         private MySqlDataAdapter adapterLave;
         private DataTable DataTableManufactured;
         private DataTable DataTableLave;
-
+        int[] result = new int[9];
         public FormCheck()
         {
             this.InitializeComponent();
@@ -69,15 +69,15 @@
                 "', Versions_ID='" + this.dataGridViewUp.Rows[0].Cells["Versions_ID"].Value +
                 "', Foundo_ID='" + this.dataGridViewUp.Rows[0].Cells["Foundo_ID"].Value +
                 "', Linia_ID='" + this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value +
-                "', No_39='" + this.dataGridViewUp.Rows[0].Cells["No_39"].Value +
-                "', No_40='" + this.dataGridViewUp.Rows[0].Cells["No_40"].Value +
-                "', No_41='" + this.dataGridViewUp.Rows[0].Cells["No_41"].Value +
-                "', No_42='" + this.dataGridViewUp.Rows[0].Cells["No_42"].Value +
-                "', No_43='" + this.dataGridViewUp.Rows[0].Cells["No_43"].Value +
-                "', No_44='" + this.dataGridViewUp.Rows[0].Cells["No_44"].Value +
-                "', No_45='" + this.dataGridViewUp.Rows[0].Cells["No_45"].Value +
-                "', No_46='" + this.dataGridViewUp.Rows[0].Cells["No_46"].Value +
-                "', Total='" + this.dataGridViewUp.Rows[0].Cells["Total"].Value +
+                "', No_39='" + result[0].ToString() +
+                "', No_40='" + result[1].ToString() +
+                "', No_41='" + result[2].ToString() +
+                "', No_42='" + result[3].ToString() +
+                "', No_43='" + result[4].ToString() +
+                "', No_44='" + result[5].ToString() +
+                "', No_45='" + result[6].ToString() +
+                "', No_46='" + result[7].ToString() +
+                "', Total='" + result[8].ToString() +
                 "', Updated_Dt=NOW() WHERE ID='" + this.dataGridViewUp.Rows[0].Cells["ID"].Value + "';";
             MySqlConnection myConn = new MySqlConnection(Connection.MyConnectionString);
             MySqlCommand cmdDataBase = new MySqlCommand(query, myConn);
@@ -258,11 +258,20 @@
         {
             try
             {
-                this.adapterManufactured.Update(this.DataTableManufactured);
-                //Refresh grid
-                this.dataGridViewDown.DataSource = this.DataTableManufactured;
-                //Calculation();
-                StringCalculation();
+                int newRecord = this.dataGridViewDown.NewRowIndex-1;
+                int chek = int.Parse(this.dataGridViewDown.Rows[newRecord].Cells["Total"].Value.ToString());
+                if (chek > 0)
+                {
+                    this.adapterManufactured.Update(this.DataTableManufactured);
+                    //Refresh grid
+                    this.dataGridViewDown.DataSource = this.DataTableManufactured;
+                    //Calculation();
+                    StringCalculation();
+                }
+                else
+                {
+                    MessageBox.Show("DO YOU realy need add Rows where Value equal Zero");
+                }
             }
             catch (Exception ex)
             {
@@ -341,29 +350,56 @@
             {
                 try
                 {
-                    int upValueForMinuend = Int32.Parse(this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value.ToString());
-                    int downValueSubtrahend = Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[e.ColumnIndex].Value.ToString());
-                    int resultValue = upValueForMinuend - downValueSubtrahend;
-                    //int[] ostatik = { Int32.Parse(this.dataGridViewUp.Rows[0].Cells[7].Value.ToString()),
-                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[8].Value.ToString()),
-                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[9].Value.ToString()),
-                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[10].Value.ToString()),
-                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[11].Value.ToString()),
-                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[12].Value.ToString()),
-                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[13].Value.ToString()),
-                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[14].Value.ToString()),
-                    //              Int32.Parse(this.dataGridViewUp.Rows[0].Cells[15].Value.ToString())};
+                    //int upValueForMinuend = Int32.Parse(this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value.ToString());
+                    //int downValueSubtrahend = Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[e.ColumnIndex].Value.ToString());
+                    //int resultValue = upValueForMinuend - downValueSubtrahend;
 
-                    if (resultValue < 0)
+                    int[] ostatik = { Int32.Parse(this.dataGridViewUp.Rows[0].Cells[7].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewUp.Rows[0].Cells[8].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewUp.Rows[0].Cells[9].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewUp.Rows[0].Cells[10].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewUp.Rows[0].Cells[11].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewUp.Rows[0].Cells[12].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewUp.Rows[0].Cells[13].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewUp.Rows[0].Cells[14].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewUp.Rows[0].Cells[15].Value.ToString())};
+
+                    int[] minued = { Int32.Parse(this.dataGridViewDown.Rows[0].Cells[7].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[8].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[9].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[10].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[11].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[12].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[13].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[14].Value.ToString()),
+                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[15].Value.ToString())};
+
+                    
+                    for (int i = 0; i < 9; i++)
                     {
-                        MessageBox.Show(mesageNegative);
-                        this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = upValueForMinuend;
-                        this.dataGridViewDown.Rows[0].Cells[e.ColumnIndex].Value = 0;
+                        result[i] = ostatik[i] - minued[i];
                     }
-                    else
-                    {
-                        this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = resultValue;
-                    }
+                    lbl_39.Text = result[0].ToString();
+                    lbl_40.Text = result[1].ToString();
+                    lbl_41.Text = result[2].ToString();
+                    lbl_42.Text = result[3].ToString();
+                    lbl_43.Text = result[4].ToString();
+                    lbl_44.Text = result[5].ToString();
+                    lbl_45.Text = result[6].ToString();
+                    lbl_46.Text = result[7].ToString();
+                    lbl_Total.Text = result[8].ToString();
+                    
+
+                    //if (resultValue < 0)
+                    //{
+                    //    MessageBox.Show(mesageNegative);
+                    //    this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = upValueForMinuend;
+                    //    this.dataGridViewDown.Rows[0].Cells[e.ColumnIndex].Value = 0;
+                    //}
+                    //else
+                    //{
+                    //    this.dataGridViewUp.Rows[0].Cells[e.ColumnIndex].Value = resultValue;
+                    //}
                     CalculationLavesTotal();
 
                 }
@@ -383,12 +419,11 @@
                 dataGridViewDown.DataSource = DataTableManufactured;
 
                 int newRecord = this.dataGridViewDown.NewRowIndex;
-                this.dataGridViewDown.AllowUserToAddRows = true;
                 DataGridViewRow R = dataGridViewDown.Rows[newRecord];
                 DataGridViewCell cell = R.Cells[1];
                 this.dataGridViewDown.CurrentCell = cell;
                 this.dataGridViewDown.BeginEdit(true);
-
+                this.dataGridViewDown.EndEdit();
                 Connection.TableLeave = "SELECT * FROM `leave` WHERE Lavoratione_ID=" + txt_Lavor.Text+ " AND Linia_ID=" + txt_Linia.Text;
                 //Refresh grid
                 DataTableLave.Clear();
@@ -411,13 +446,17 @@
                 byte liniavalaue = Convert.ToByte(this.dataGridViewUp.Rows[0].Cells["Linia_ID"].Value.ToString());
                 this.dataGridViewDown.Rows[newRecord].Cells["Linia_ID"].Value = liniavalaue;
 
-                this.dataGridViewDown.Rows[newRecord].Cells[7].Selected = true;
+                SendKeys.Send("{TAB}");
+                SendKeys.Send("{TAB}");
+                SendKeys.Send("{TAB}");
+                SendKeys.Send("{TAB}");
+                SendKeys.Send("{TAB}");
+                SendKeys.Send("{TAB}");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(string.Concat(ex));
             }
-
         }
 
         private void txt_Lavor_TextChanged(object sender, EventArgs e)
@@ -427,11 +466,11 @@
                 try
                 {
                     int newRecord = this.dataGridViewDown.NewRowIndex;
-                    this.dataGridViewDown.AllowUserToAddRows = true;
                     DataGridViewRow R = dataGridViewDown.Rows[newRecord];
                     DataGridViewCell cell = R.Cells[1];
                     this.dataGridViewDown.CurrentCell = cell;
                     this.dataGridViewDown.BeginEdit(true);
+                    this.dataGridViewDown.EndEdit();
 
                     Connection.TableLeave = "SELECT * FROM `leave` WHERE Lavoratione_ID=" + txt_Lavor.Text;
 
@@ -459,8 +498,12 @@
                     {
                         this.dataGridViewUp.Columns["Linia_ID"].DefaultCellStyle.BackColor = Color.Red;
                     }
-
-                    this.dataGridViewDown.Rows[newRecord].Cells[7].Selected = true;
+                    SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
+                    SendKeys.Send("{TAB}");
                 }
                 catch (Exception ex)
                 {

@@ -3,6 +3,7 @@
     using System.Windows.Forms;
     public partial class FormDate : Form
     {
+        //private string curentSelectDate;
         public FormDate()
         {
             this.InitializeComponent();
@@ -12,10 +13,6 @@
             get
             {
                 return this.monthCalendar.SelectionRange.Start.ToString("yyyy-MM-dd");
-            }
-            set 
-            { 
-                value = this.monthCalendar.SelectionRange.Start.ToString("yyyy-MM-dd"); 
             }
         }
 
