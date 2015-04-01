@@ -113,6 +113,7 @@
             // 
             // txt_Lavor
             // 
+            this.txt_Lavor.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.txt_Lavor.Location = new System.Drawing.Point(328, 415);
             this.txt_Lavor.Name = "txt_Lavor";
             this.txt_Lavor.Size = new System.Drawing.Size(53, 20);
@@ -122,6 +123,7 @@
             // 
             // lbl_Lavoration
             // 
+            this.lbl_Lavoration.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lbl_Lavoration.AutoSize = true;
             this.lbl_Lavoration.Location = new System.Drawing.Point(325, 397);
             this.lbl_Lavoration.Name = "lbl_Lavoration";
@@ -131,6 +133,8 @@
             // 
             // lbl_Total
             // 
+            this.lbl_Total.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_Total.AutoSize = true;
             this.lbl_Total.Location = new System.Drawing.Point(939, 148);
             this.lbl_Total.Name = "lbl_Total";
@@ -140,6 +144,8 @@
             // 
             // lbl_46
             // 
+            this.lbl_46.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_46.AutoSize = true;
             this.lbl_46.Location = new System.Drawing.Point(880, 148);
             this.lbl_46.Name = "lbl_46";
@@ -149,6 +155,8 @@
             // 
             // lbl_45
             // 
+            this.lbl_45.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_45.AutoSize = true;
             this.lbl_45.Location = new System.Drawing.Point(820, 148);
             this.lbl_45.Name = "lbl_45";
@@ -158,6 +166,8 @@
             // 
             // lbl_44
             // 
+            this.lbl_44.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_44.AutoSize = true;
             this.lbl_44.Location = new System.Drawing.Point(760, 148);
             this.lbl_44.Name = "lbl_44";
@@ -167,6 +177,8 @@
             // 
             // lbl_43
             // 
+            this.lbl_43.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_43.AutoSize = true;
             this.lbl_43.Location = new System.Drawing.Point(702, 148);
             this.lbl_43.Name = "lbl_43";
@@ -176,6 +188,8 @@
             // 
             // lbl_42
             // 
+            this.lbl_42.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_42.AutoSize = true;
             this.lbl_42.Location = new System.Drawing.Point(642, 148);
             this.lbl_42.Name = "lbl_42";
@@ -185,6 +199,8 @@
             // 
             // lbl_41
             // 
+            this.lbl_41.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_41.AutoSize = true;
             this.lbl_41.Location = new System.Drawing.Point(582, 148);
             this.lbl_41.Name = "lbl_41";
@@ -194,6 +210,8 @@
             // 
             // lbl_40
             // 
+            this.lbl_40.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_40.AutoSize = true;
             this.lbl_40.Location = new System.Drawing.Point(523, 148);
             this.lbl_40.Name = "lbl_40";
@@ -203,6 +221,8 @@
             // 
             // lbl_39
             // 
+            this.lbl_39.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_39.AutoSize = true;
             this.lbl_39.Location = new System.Drawing.Point(464, 148);
             this.lbl_39.Name = "lbl_39";
@@ -212,6 +232,7 @@
             // 
             // txt_Linia
             // 
+            this.txt_Linia.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.txt_Linia.Location = new System.Drawing.Point(387, 415);
             this.txt_Linia.Name = "txt_Linia";
             this.txt_Linia.Size = new System.Drawing.Size(53, 20);
@@ -220,6 +241,7 @@
             // 
             // lal_Linia
             // 
+            this.lal_Linia.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lal_Linia.AutoSize = true;
             this.lal_Linia.Location = new System.Drawing.Point(388, 397);
             this.lal_Linia.Name = "lal_Linia";
@@ -229,6 +251,7 @@
             // 
             // cmb_Run
             // 
+            this.cmb_Run.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cmb_Run.Location = new System.Drawing.Point(452, 415);
             this.cmb_Run.Name = "cmb_Run";
             this.cmb_Run.Size = new System.Drawing.Size(75, 23);

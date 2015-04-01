@@ -16,6 +16,8 @@
         private DataTable DataTableManufactured;
         private DataTable DataTableLave;
         int[] result = new int[9];
+        private string mesageNegative = "Check Manufetured Production smething is a Wrong.\nLaves canot be Negative";
+
         public FormCheck()
         {
             this.InitializeComponent();
@@ -240,7 +242,6 @@
 
                 //return datatable with all records
                 return DataSetLave.Tables[0];
-
             }
             catch (Exception ex)
             {
@@ -258,19 +259,37 @@
         {
             try
             {
+                //get last record row where to work User
                 int newRecord = this.dataGridViewDown.NewRowIndex-1;
+
                 int chek = int.Parse(this.dataGridViewDown.Rows[newRecord].Cells["Total"].Value.ToString());
-                if (chek > 0)
+                
+                bool[] negativ = {false, false, false, false, false, false, false, false, false};
+                
+                for (int shoeNumber = 0; shoeNumber < result.Length; shoeNumber++)
                 {
+                    if (result[shoeNumber] >= 0)
+                    {
+                        negativ[shoeNumber] = true;
+                    }
+                    else
+                    {
+                        //MessageBox.Show(mesageNegative);
+                    }
+                }
+
+                if (negativ[0] && negativ[1] && negativ[2] && negativ[3] && negativ[4] && negativ[5] && negativ[6] && negativ[7] && negativ[8]==true)
+                {
+                    //save ne record
                     this.adapterManufactured.Update(this.DataTableManufactured);
                     //Refresh grid
                     this.dataGridViewDown.DataSource = this.DataTableManufactured;
-                    //Calculation();
+                    //Update record in Lave Table
                     StringCalculation();
                 }
                 else
                 {
-                    MessageBox.Show("DO YOU realy need add Rows where Value equal Zero");
+                    MessageBox.Show(mesageNegative);
                 }
             }
             catch (Exception ex)
@@ -314,12 +333,17 @@
         private void dataGridViewDown_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             int enteredValue = this.dataGridViewDown.NewRowIndex - 1;
-            string mesageNegative = "Check Manufetured Production smething is a Wrong. Laves canot be Negative";
             if (e.ColumnIndex >= 7 && e.ColumnIndex <= 14)
             {
                 try
                 {
                     int SelectedRowIndex = e.RowIndex;
+                    bool ttry = int.Parse(this.dataGridViewDown.Rows[SelectedRowIndex].Cells[e.ColumnIndex].Value.ToString()) < 0;
+                    if (ttry)
+                    {
+                        MessageBox.Show("Entered value cannot be Negative\nNow Value will be reset to the ZERO");
+                        this.dataGridViewDown.Rows[SelectedRowIndex].Cells[e.ColumnIndex].Value = 0;
+                    }
                     //Save records in database using DTItems which is datasource for Grid
                     //Calculate Values columns by rows in total column
                     if (this.dataGridViewDown.Rows[SelectedRowIndex].Cells["Total"].Value == DBNull.Value)
@@ -364,15 +388,15 @@
                                       Int32.Parse(this.dataGridViewUp.Rows[0].Cells[14].Value.ToString()),
                                       Int32.Parse(this.dataGridViewUp.Rows[0].Cells[15].Value.ToString())};
 
-                    int[] minued = { Int32.Parse(this.dataGridViewDown.Rows[0].Cells[7].Value.ToString()),
-                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[8].Value.ToString()),
-                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[9].Value.ToString()),
-                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[10].Value.ToString()),
-                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[11].Value.ToString()),
-                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[12].Value.ToString()),
-                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[13].Value.ToString()),
-                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[14].Value.ToString()),
-                                      Int32.Parse(this.dataGridViewDown.Rows[0].Cells[15].Value.ToString())};
+                    int[] minued = { Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[7].Value.ToString()),
+                                     Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[8].Value.ToString()),
+                                     Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[9].Value.ToString()),
+                                     Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[10].Value.ToString()),
+                                     Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[11].Value.ToString()),
+                                     Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[12].Value.ToString()),
+                                     Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[13].Value.ToString()),
+                                     Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[14].Value.ToString()),
+                                     Int32.Parse(this.dataGridViewDown.Rows[enteredValue].Cells[15].Value.ToString())};
 
                     
                     for (int i = 0; i < 9; i++)
