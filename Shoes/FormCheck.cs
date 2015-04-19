@@ -32,7 +32,7 @@
                 //Get all items in datatable
                 DataTableManufactured = GetAllItemsManufactoring();
                 //DataTableLave.Clear();
-                Connection.TableLeave = "SELECT * FROM `leave`";
+                Connection.TableLeave = "SELECT * FROM `leave` WHERE Total > 0";
                 DataTableLave = GetAllItemsLave();
                 //Fill grid with items
                 dataGridViewDown.DataSource = DataTableManufactured;
@@ -529,6 +529,11 @@
                     SendKeys.Send("{TAB}");
                     SendKeys.Send("{TAB}");
                 }
+                catch (ArgumentOutOfRangeException)
+                {
+                    MessageBox.Show("the Lavoration is No in Manufacturing proces");
+                }
+
                 catch (Exception ex)
                 {
                     MessageBox.Show(string.Concat(ex));
