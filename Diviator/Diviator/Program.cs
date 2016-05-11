@@ -6,7 +6,7 @@ namespace Diviator
     {
         static void Main()
         {
-
+            Console.WriteLine("trifasen");
         }
     }
 }
